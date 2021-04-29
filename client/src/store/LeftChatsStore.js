@@ -170,6 +170,77 @@ export default class LeftChatStore {
                 unreadCounter: 100,
                 heRead: false,
                 pinned: false
+            },
+            {
+                userId: 3,
+                userName: 'Alex Alex',
+                userPhoto: 'https://via.placeholder.com/150/6a0f83',
+                time: Date.now()-120*1000,
+                sender: 3,
+                media: 'video',
+                message: null,
+                unreadCounter: 0,
+                heRead: false,
+                pinned: false
+            },
+            {
+                userId: 100,
+                userName: 'Serge Mavrodi',
+                userPhoto: 'https://via.placeholder.com/150/5e12c6',
+                time: Date.now()-500*1000,
+                sender: 1,
+                media: 'blank.txt',
+                message: null,
+                unreadCounter: 100,
+                heRead: false,
+                pinned: false
+            },   {
+                userId: 3,
+                userName: 'Alex Alex',
+                userPhoto: 'https://via.placeholder.com/150/6a0f83',
+                time: Date.now()-120*1000,
+                sender: 3,
+                media: 'video',
+                message: null,
+                unreadCounter: 0,
+                heRead: false,
+                pinned: false
+            },
+            {
+                userId: 100,
+                userName: 'Serge Mavrodi',
+                userPhoto: 'https://via.placeholder.com/150/5e12c6',
+                time: Date.now()-500*1000,
+                sender: 1,
+                media: 'blank.txt',
+                message: null,
+                unreadCounter: 100,
+                heRead: false,
+                pinned: false
+            },
+            {
+                userId: 3,
+                userName: 'Alex Alex',
+                userPhoto: 'https://via.placeholder.com/150/6a0f83',
+                time: Date.now()-120*1000,
+                sender: 3,
+                media: 'video',
+                message: null,
+                unreadCounter: 0,
+                heRead: false,
+                pinned: false
+            },
+            {
+                userId: 100,
+                userName: 'Serge Mavrodi',
+                userPhoto: 'https://via.placeholder.com/150/5e12c6',
+                time: Date.now()-500*1000,
+                sender: 1,
+                media: 'blank.txt',
+                message: null,
+                unreadCounter: 100,
+                heRead: false,
+                pinned: false
             }
 
         ]

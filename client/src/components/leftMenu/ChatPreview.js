@@ -4,15 +4,22 @@ import {observer} from "mobx-react-lite";
 
 const ChatPreview = observer(({dialog}) => {
 
-    const {user} = useContext(Context)
+    const {user, chat} = useContext(Context)
 
     const {userId, userName, userPhoto, time, sender, media, message, unreadCounter, pinned, heRead} = dialog
 
 
     const you = sender === user.userId
 
+    const chatClickHandler = ()=>{
+        console.log('select chat', userId)
+        chat.setChatWith(userId)
+    }
+
     return (
-        <div className={'dialog'}>
+        <div className={'dialog'}
+        onClick={chatClickHandler}
+        >
 
             <div className={'dialogPhoto'}>
                 <img src={userPhoto} className={'userAvatar'}

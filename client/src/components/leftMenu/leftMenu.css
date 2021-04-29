@@ -3,15 +3,15 @@
     width: 31%;
 
     border-right: 2px solid #E9EBED;
-    padding-bottom: 10px;
+    /*padding-bottom: 10px;*/
 
     /*temp*/
-    border: 2px solid #9c1818;
+    /*border: 2px solid #9c1818;*/
 
 }
 
 .searchLeft {
-    padding: 12px;
+    padding: 12px 12px 6px;
     background-color: #ffffff;
     /*width: 100%;*/
 }
@@ -32,14 +32,18 @@
 .chatsFull {
     position: relative;
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+
+
+    overflow: auto;
+
+
 }
 
 
 .dialog {
     display: block;
-    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .dialogPhoto {
@@ -57,7 +61,7 @@
 
 
 .dialogMeta {
-    margin-right: 25px;
+    margin-right: 6px;
     float: right;
 }
 
@@ -72,6 +76,7 @@
     width: fit-content;
     border-radius: 10px;
     background: #bfbfbf;
+    color: #ffffff;
 }
 
 .unreadCounterText {

@@ -25,10 +25,8 @@ const ChatsLeftMenu = () => {
     const {leftChats} = useContext(Context)
 
     return (
-        <div className={'chatsFull'} style={{height: height-125}}>
-            <div className={'chats2'}>
-                {/*chats full*/}
-            </div>
+        <div className={'chatsFull'} style={{height: height-108}}>
+
             {leftChats.chatsList.map((dialog, index)=>
                 <ChatPreview
                     dialog={dialog}
