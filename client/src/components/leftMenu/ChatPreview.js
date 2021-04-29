@@ -11,11 +11,12 @@ const ChatPreview = observer(({dialog}) => {
 
     const you = sender === user.userId
     const selected = chat.chatWith === userId
-    console.log(selected)
+
 
     const chatClickHandler = ()=>{
         // console.log('select chat', userId)
         chat.setChatWith(userId)
+        chat.setChatAvatar(userPhoto)
     }
 
     return (

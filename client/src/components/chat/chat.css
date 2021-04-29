@@ -1,7 +1,79 @@
-.chat{
+.chatMain{
     /*float: right;*/
     width: 69%;
 
 
-    border: 2px solid #cfe04e;
+    /*border: 2px solid #cfe04e;*/
 }
+
+.chatMessages{
+height: 100px;
+    background-color: #daefe7;
+}
+
+
+.sendComponent{
+    display: flex;
+    /*background-color: #3a6d99;*/
+    height: 140px;
+
+}
+
+
+
+.messageTextArea{
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    display: block;
+    resize: none;
+    width: 100%;
+    max-width: 100%;
+    border: 0;
+    outline: none;
+    box-shadow: 0 1px 0 0 #e8e8e8;
+    padding: 1px 28px 1px 0;
+    position: relative;
+    margin: 0;
+    min-height: 80px;
+    /*height: 10vh;*/
+    line-height: 20px;
+    height: auto;
+    box-sizing: border-box;
+    /*margin-left: 60px;*/
+} .messageTextArea:focus{
+      box-shadow: 0 2px 0 0 #7fbaea;
+  }
+.divTextArea{
+    /*background-color: #F2F2F2;*/
+    display: inline-block;
+    width: 100%;
+}
+
+
+.userPhoto {
+    margin-left: 6px;
+    float: left;
+}
+
+
+.userAvatarSend {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.chatPhoto {
+    margin-left: 6px;
+    float: right;
+}
+
+.sendButton{
+    color: #499dd9;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: bold;
+} .sendButton:hover{
+    color: #0d7cce;
+  }

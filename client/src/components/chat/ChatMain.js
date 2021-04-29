@@ -2,14 +2,18 @@ import React, {useContext} from 'react';
 import './chat.css'
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import SendMessage from "./SendMessage";
+import Dialog from "./Dialog";
 
 const ChatMain = observer(() => {
     const {chat} = useContext(Context)
+    console.log(chat.chatWith)
     return (
-        <div className={'chat'}>
-            Chat main
-            <br/>
-            chat with  user{chat.chatWith}
+        <div className={'chatMain'}>
+
+            <Dialog/>
+
+            <SendMessage/>
         </div>
     );
 })

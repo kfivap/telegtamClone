@@ -7,6 +7,7 @@ export default class UserStore {
         // this._userId = null
         this._isAuth = true
         this._userId = 1
+        this._userAvatar = 'https://via.placeholder.com/150/5e12c6'
 
         makeAutoObservable(this)
     }
@@ -17,6 +18,9 @@ export default class UserStore {
     setUserId(id){
         this._userId = id
     }
+    setUserAvatar(src){
+        this._userAvatar = src
+    }
 
 
     get isAuth(){
@@ -24,6 +28,9 @@ export default class UserStore {
     }
     get userId(){
         return this._userId
+    }
+    get userAvatar(){
+        return this._userAvatar
     }
 
 
