@@ -10,14 +10,16 @@ const ChatPreview = observer(({dialog}) => {
 
 
     const you = sender === user.userId
+    const selected = chat.chatWith === userId
+    console.log(selected)
 
     const chatClickHandler = ()=>{
-        console.log('select chat', userId)
+        // console.log('select chat', userId)
         chat.setChatWith(userId)
     }
 
     return (
-        <div className={'dialog'}
+        <div className={`dialog ${selected? 'dialogSelected': null}`}
         onClick={chatClickHandler}
         >
 
@@ -27,11 +29,13 @@ const ChatPreview = observer(({dialog}) => {
             </div>
 
 
-            <div className={'dialogMeta'}>
+            <div className={`dialogMeta
+            ${selected? 'dialogMetaSelected': null}
+            `}>
                 <div className={'dialogTime'}>
                     18:45
                 </div>
-                {unreadCounter!==0 ?
+                {unreadCounter!==0  &&!you?
                     <div className={'unreadCounter'}>
                         <div className={'unreadCounterText'}>
                         {unreadCounter}
@@ -40,7 +44,7 @@ const ChatPreview = observer(({dialog}) => {
                     :
                     null
                 }
-                { !heRead && unreadCounter===0?
+                { !heRead && (unreadCounter===0 || you) ?
                     <div className={'heReadMarker'}> </div>
                     :
                     null
@@ -48,18 +52,27 @@ const ChatPreview = observer(({dialog}) => {
 
             </div>
 
-            <div className={'dialogCenter'}>
+            <div className={
+                `dialogCenter 
+                ${selected? 'dialogCenterSelected': null}
+                `}>
                 <div className={'dialogWith'}>
                      {userName}
                 </div>
                 <div className={'dialogMessage'}>
                    {you?
-                       <span className={'blueMessage'}>You: </span>
+                       <span className={`
+                       ${selected? null: 'blueMessage'}
+                       `}>
+                           You:&nbsp;
+                       </span>
                        :
                        null}
                     {message}
                     {media?
-                        <span className={'blueMessage'}>{media} </span>
+                        <span className={`
+                       ${selected? null: 'blueMessage'}
+                       `}>{media} </span>
                         :
                         null
                      }

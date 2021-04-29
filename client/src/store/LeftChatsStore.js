@@ -30,7 +30,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 55,
                 userName: 'Donal Trump',
                 userPhoto: 'https://via.placeholder.com/150/66b7d2',
                 time: Date.now()-500*1000,
@@ -42,7 +42,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 3,
+                userId: 34,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/4d564d',
                 time: Date.now()-120*1000,
@@ -54,7 +54,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 1050,
                 userName: 'Pavel Durov',
                 userPhoto: 'https://via.placeholder.com/150/501fe1',
                 time: Date.now()-500*1000,
@@ -65,7 +65,7 @@ export default class LeftChatStore {
                 heRead: true,
                 pinned: false
             },            {
-                userId: 3,
+                userId: 153,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/6a0f83',
                 time: Date.now()-120*1000,
@@ -77,7 +77,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 15100,
                 userName: 'Serge Mavrodi',
                 userPhoto: 'https://via.placeholder.com/150/5e12c6',
                 time: Date.now()-500*1000,
@@ -89,7 +89,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 2,
+                userId: 2787,
                 userName: 'Nick Stoyan',
                 userPhoto: 'https://via.placeholder.com/150/24f355',
                 time: Date.now(),
@@ -101,7 +101,7 @@ export default class LeftChatStore {
                 pinned: true
             },
             {
-                userId: 3,
+                userId: 394,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/d32776',
                 time: Date.now()-120*1000,
@@ -113,7 +113,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 45,
                 userName: 'Donal Trump',
                 userPhoto: 'https://via.placeholder.com/150/66b7d2',
                 time: Date.now()-500*1000,
@@ -125,7 +125,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 3,
+                userId: 484,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/4d564d',
                 time: Date.now()-120*1000,
@@ -137,7 +137,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 10650,
                 userName: 'Pavel Durov',
                 userPhoto: 'https://via.placeholder.com/150/501fe1',
                 time: Date.now()-500*1000,
@@ -148,7 +148,7 @@ export default class LeftChatStore {
                 heRead: true,
                 pinned: false
             },            {
-                userId: 3,
+                userId: 3654,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/6a0f83',
                 time: Date.now()-120*1000,
@@ -160,7 +160,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 105640,
                 userName: 'Serge Mavrodi',
                 userPhoto: 'https://via.placeholder.com/150/5e12c6',
                 time: Date.now()-500*1000,
@@ -172,7 +172,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 3,
+                userId: 564,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/6a0f83',
                 time: Date.now()-120*1000,
@@ -184,7 +184,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 18700,
                 userName: 'Serge Mavrodi',
                 userPhoto: 'https://via.placeholder.com/150/5e12c6',
                 time: Date.now()-500*1000,
@@ -195,7 +195,7 @@ export default class LeftChatStore {
                 heRead: false,
                 pinned: false
             },   {
-                userId: 3,
+                userId: 37865,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/6a0f83',
                 time: Date.now()-120*1000,
@@ -207,7 +207,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 112300,
                 userName: 'Serge Mavrodi',
                 userPhoto: 'https://via.placeholder.com/150/5e12c6',
                 time: Date.now()-500*1000,
@@ -219,7 +219,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 3,
+                userId: 3546,
                 userName: 'Alex Alex',
                 userPhoto: 'https://via.placeholder.com/150/6a0f83',
                 time: Date.now()-120*1000,
@@ -231,7 +231,7 @@ export default class LeftChatStore {
                 pinned: false
             },
             {
-                userId: 100,
+                userId: 15600,
                 userName: 'Serge Mavrodi',
                 userPhoto: 'https://via.placeholder.com/150/5e12c6',
                 time: Date.now()-500*1000,

@@ -42,8 +42,10 @@
 
 .dialog {
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 8px;
+    padding-bottom: 14px;
+}  .dialogSelected {
+    background-color: #6490b1;
 }
 
 .dialogPhoto {
@@ -63,7 +65,9 @@
 .dialogMeta {
     margin-right: 6px;
     float: right;
-}
+} .dialogMetaSelected{
+    color: #F2F2F2;
+  }
 
 .unreadCounter {
     height: 20px;
@@ -87,7 +91,7 @@
     margin: 6px auto 0  ;
 
     border-radius: 10px;
-    background-color: #3a6d99;
+    background-color: #b0caea;
     width: 10px;
     height: 10px;
 }
@@ -102,12 +106,15 @@
     padding-left: 6px;
     margin-left: 60px;
     line-height: 1.4;
-}
+} .dialogCenterSelected{
+    color: #F2F2F2;
+  }
 
 .dialogWith {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-weight: 600;
 }
 
 .dialogMessage {
