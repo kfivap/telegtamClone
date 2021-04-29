@@ -1,17 +1,23 @@
-import LongPulling from "./LongPulling";
-import EventSourcing from "./EvemtSourcing";
-import WebSock from "./WebSock";
-
+import React from 'react'
+import NavBar from "./components/navbar/NavBar";
+import LeftMenuMain from "./components/leftMenu/LeftMenuMain";
+import ChatMain from "./components/chat/ChatMain";
 
 
 function App() {
-  return (
-    <div className="App">
-      {/*<LongPulling/>*/}
-      {/*<EventSourcing/>*/}
-      <WebSock/>
-    </div>
-  );
+    return (
+        <div className="App">
+
+            <div className='pageWrap'>
+                <NavBar/>
+                <div className='flexContainer'>
+                    <LeftMenuMain/>
+                    <ChatMain/>
+                </div>
+
+            </div>
+        </div>
+    );
 }
 
 export default App;

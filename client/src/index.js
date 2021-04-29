@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import LeftChatsStore from "./store/LeftChatsStore";
+import UserStore from "./store/UserStore";
 
+export const Context = createContext(null)
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <Context.Provider value={{
+        leftChats: new LeftChatsStore(),
+        user: new UserStore()
+    }}
+    >
+        <App/>
+    </Context.Provider>
+
+    ,
+    document.getElementById('root')
 );
