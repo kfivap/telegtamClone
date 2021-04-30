@@ -7,7 +7,7 @@ import Dialog from "./Dialog";
 
 const ChatMain = observer(() => {
     const {chat} = useContext(Context)
-    console.log(chat.chatWith)
+    // console.log(chat.chatWith)
     return (
         <div className={'chatMain'}>
 

@@ -1,8 +1,11 @@
 import React, {useContext} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import { useHistory } from "react-router-dom";
 
 const ChatPreview = observer(({dialog}) => {
+
+    let history = useHistory();
 
     const {user, chat} = useContext(Context)
 
@@ -17,6 +20,9 @@ const ChatPreview = observer(({dialog}) => {
         // console.log('select chat', userId)
         chat.setChatWith(userId)
         chat.setChatAvatar(userPhoto)
+        chat.setChatWithName(userName)
+        // console.log('history')
+        history.push(`/im/${userId}`)
     }
 
     return (

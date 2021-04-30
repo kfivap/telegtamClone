@@ -1,4 +1,6 @@
-import React, {useLayoutEffect, useState} from 'react';
+import React, {useContext, useLayoutEffect, useState} from 'react';
+import {Context} from "../../index";
+import Message from "./Message";
 
 const Dialog = () => {
 
@@ -17,11 +19,32 @@ const Dialog = () => {
 
     const [width, height] = useWindowSize();
 
+    const {chat} =useContext(Context)
+
+    let lastId = null
+
     return (
         <div className={'chatMessages'}
         style={{height: height-200}}
         >
-            Dialog
+
+            {chat.messageList.map((message, index)=>{
+
+                let userInfoNeeded = true
+                if(lastId === message.authorId ){
+                    userInfoNeeded = false
+                }
+
+                lastId = message.authorId
+
+                return(<Message
+                    key={index}
+                    message={message}
+                    userInfoNeeded={userInfoNeeded}
+
+                />)
+            })}
+
 
         </div>
     );
