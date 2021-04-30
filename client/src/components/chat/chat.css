@@ -10,6 +10,9 @@
 
     background-color: #ffffff;
     cursor: pointer;
+
+    overflow: auto;
+/*padding-bottom: 20px;*/
 }
 
 
@@ -17,6 +20,7 @@
     display: flex;
     /*background-color: #3a6d99;*/
     height: 140px;
+    padding-top: 10px;
 
 }
 
@@ -112,7 +116,7 @@ flex-grow: 10000;
 }
 
 .unreadMarker{
-margin: 10px 6px 0 -5px;
+margin: 8px 6px 0 -5px;
     border-radius: 10px;
     background-color: #6ba3e8;
     min-width: 10px;

@@ -21,6 +21,7 @@ const ChatPreview = observer(({dialog}) => {
         chat.setChatWith(userId)
         chat.setChatAvatar(userPhoto)
         chat.setChatWithName(userName)
+        chat.setMessageList([])
         // console.log('history')
         history.push(`/im/${userId}`)
     }

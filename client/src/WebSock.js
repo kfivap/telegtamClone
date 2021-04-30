@@ -1,12 +1,13 @@
-import React, { useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
+import {observer} from "mobx-react-lite";
 
 
-const WebSock = () => {
+const WebSock = observer(() => {
     const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
     const socket = useRef()
     const [connected, setConnected] = useState(false)
-    const [username, setUserName] = useState('')
+
 
 
 
@@ -18,7 +19,7 @@ const WebSock = () => {
 
             const message = {
                 event: 'connection',
-                username,
+                username: 1,
                 id: Date.now()
             }
             socket.current.send(JSON.stringify(message))
@@ -41,7 +42,7 @@ const WebSock = () => {
     const sendMessage = async () => {
 
         const message = {
-            username,
+            username:1,
             message: value,
             id: Date.now(),
             event: 'message'
@@ -50,21 +51,11 @@ const WebSock = () => {
         setValue('')
     }
 
+useEffect(()=>{
     if(!connected){
-        return (
-            <div className={'center'}>
-                <div className={'form'}>
-                    <input
-                        value={username}
-                        type={'text'}
-                        placeholder={'type your name'}
-                        onChange={e=>setUserName(e.target.value)}
-                    />
-                    <button onClick={connect}>Login</button>
-                </div>
-            </div>
-        )
+        connect()
     }
+}, [])
 
     return (
         <div className='center'>
@@ -85,6 +76,6 @@ const WebSock = () => {
             </div>
         </div>
     );
-};
+});
 
 export default WebSock;

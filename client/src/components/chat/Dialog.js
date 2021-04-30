@@ -1,8 +1,10 @@
 import React, {useContext, useLayoutEffect, useState} from 'react';
 import {Context} from "../../index";
 import Message from "./Message";
+import {observer} from "mobx-react-lite";
+import {toJS} from "mobx";
 
-const Dialog = () => {
+const Dialog = observer(() => {
 
     function useWindowSize() {
         const [size, setSize] = useState([0, 0]);
@@ -23,12 +25,13 @@ const Dialog = () => {
 
     let lastId = null
 
+
     return (
         <div className={'chatMessages'}
         style={{height: height-200}}
         >
 
-            {chat.messageList.map((message, index)=>{
+            {toJS(chat.messageList).map((message, index)=>{
 
                 let userInfoNeeded = true
                 if(lastId === message.authorId ){
@@ -48,6 +51,6 @@ const Dialog = () => {
 
         </div>
     );
-};
+})
 
 export default Dialog;

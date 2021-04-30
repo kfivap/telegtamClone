@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, toJS} from "mobx";
 
 export default class ChatStore {
     constructor() {
@@ -40,7 +40,13 @@ export default class ChatStore {
     }
 
     pushMessageList(messages){
-        this._messageList = this._messageList.push[messages]
+        // console.log(toJS(this._messageList))
+        // console.log(messages)
+        if(messages.event === 'message'){
+            this._messageList = [...toJS(this._messageList), messages]
+        }
+
+
     }
 
     setMessageList(messages){

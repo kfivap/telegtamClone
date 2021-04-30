@@ -6,6 +6,7 @@ import LeftChatsStore from "./store/LeftChatsStore";
 import UserStore from "./store/UserStore";
 import ChatStore from "./store/ChatStore";
 
+
 export const Context = createContext(null)
 
 ReactDOM.render(
@@ -15,7 +16,9 @@ ReactDOM.render(
         chat: new ChatStore()
     }}
     >
+
         <App/>
+
     </Context.Provider>
 
     ,
