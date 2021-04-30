@@ -33,6 +33,7 @@ const Dialog = observer(() => {
 
             {toJS(chat.messageList).map((message, index)=>{
 
+                if(!message){ return }
                 let userInfoNeeded = true
                 if(lastId === message.authorId ){
                     userInfoNeeded = false

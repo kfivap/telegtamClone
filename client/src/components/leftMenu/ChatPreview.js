@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import { useHistory } from "react-router-dom";
+import {toJS} from "mobx";
 
 const ChatPreview = observer(({dialog}) => {
 
@@ -17,12 +18,35 @@ const ChatPreview = observer(({dialog}) => {
 
 
     const chatClickHandler = ()=>{
-        // console.log('select chat', userId)
+        if(chat.chatWith){
+            chat.setCacheMessages(chat.chatWith)
+        }
+
         chat.setChatWith(userId)
         chat.setChatAvatar(userPhoto)
         chat.setChatWithName(userName)
-        chat.setMessageList([])
-        // console.log('history')
+
+
+        // console.log(toJS(chat.cachedMessagesList)[chat.chatWith])
+        // console.log(chat.chatWith)
+        const cachedMessages  = toJS(chat.cachedMessagesList)
+        console.log(cachedMessages)
+        console.log(cachedMessages[chat.chatWith])
+        if(cachedMessages[chat.chatWith]){
+            chat.setMessageList(cachedMessages[chat.chatWith])
+        } if(!cachedMessages[chat.chatWith]){
+            chat.setMessageList([])
+        }
+
+
+        // if(chat.chatWith && toJS(chat.cachedMessagesList)[chat.chatWith]){
+        //     chat.setMessageList([
+        //         toJS(chat.cachedMessagesList)[chat.chatWith]
+        //     ])
+        // }
+
+
+
         history.push(`/im/${userId}`)
     }
 

@@ -28,6 +28,7 @@ export default class ChatStore {
                 date: '18:45'
             }
         ]
+        this._cachedMessagesList = {}
         makeAutoObservable(this)
     }
 
@@ -38,16 +39,16 @@ export default class ChatStore {
     setChatAvatar(src){
         this._chatAvatar = src
     }
-
     pushMessageList(messages){
-        // console.log(toJS(this._messageList))
-        // console.log(messages)
         if(messages.event === 'message'){
             this._messageList = [...toJS(this._messageList), messages]
         }
-
+    }
+    setCacheMessages(chatWith){
+        this._cachedMessagesList[chatWith] = this.messageList
 
     }
+
 
     setMessageList(messages){
         this._messageList = messages
@@ -69,6 +70,8 @@ export default class ChatStore {
     get chatWithName(){
         return this._chatWithName
     }
-
+    get cachedMessagesList(){
+        return this._cachedMessagesList
+    }
 
 }
