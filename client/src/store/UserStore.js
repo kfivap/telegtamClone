@@ -5,7 +5,7 @@ export default class UserStore {
     constructor() {
         // this._isAuth = false
         // this._userId = null
-        this._isAuth = true
+        this._isAuth = false
         this._userId = 1
         this._userAvatar = 'https://via.placeholder.com/150/5e12c6'
         this._userName = 'Kirill Kirill'

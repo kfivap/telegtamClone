@@ -17,7 +17,7 @@ const SendMessage = observer(() => {
 
 
     function connect() {
-        socket.current = new WebSocket('ws://localhost:5000')
+        socket.current = new WebSocket('ws://localhost:5001')
 
         socket.current.onopen = () => {
             setConnected(true)
@@ -63,6 +63,8 @@ const SendMessage = observer(() => {
         }
         socket.current.send(JSON.stringify(message))
 
+
+        //echo
         setTimeout(()=>{
             const message2 = {
                 event: 'message',

@@ -1,11 +1,21 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import NavBar from "./components/navbar/NavBar";
 import LeftMenuMain from "./components/leftMenu/LeftMenuMain";
 import ChatMain from "./components/chat/ChatMain";
 import {BrowserRouter} from "react-router-dom";
+import {Context} from "./index";
+import AuthPage from "./components/auth/AuthPage";
+import {observer} from "mobx-react-lite";
 
 
-function App() {
+const App = observer(()=> {
+
+    const {user} = useContext(Context)
+
+    if(!user.isAuth){
+        return <AuthPage/>
+    }
+
     return (
         <div className="App">
 <BrowserRouter>
@@ -20,6 +30,6 @@ function App() {
 </BrowserRouter>
         </div>
     );
-}
+})
 
 export default App;
