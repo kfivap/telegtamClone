@@ -5,13 +5,14 @@ const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type: DataTypes.STRING, unique: true},
     nick: {type: DataTypes.STRING, unique: true},
+    avatar: {type:DataTypes.STRING},
     password: {type: DataTypes.STRING},
 })
 
 const Chat = sequelize.define('chat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    firstUser: {type: DataTypes.INTEGER, allowNull: false},
-    secondUser: {type: DataTypes.INTEGER, allowNull: false}
+    usersArray: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false},
+
 })
 
 const Message = sequelize.define('message', {

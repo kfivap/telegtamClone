@@ -30,7 +30,7 @@ const start = async () => {
             // ws.id = Date.now()
             ws.on('message', function (message) {
                 message = JSON.parse(message)
-                console.log(message)
+                // console.log(message)
                 switch (message.event) {
                     case 'message':
                         // broadcastMessage(message)

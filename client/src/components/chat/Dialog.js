@@ -1,8 +1,9 @@
-import React, {useContext, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
 import {Context} from "../../index";
 import Message from "./Message";
 import {observer} from "mobx-react-lite";
 import {toJS} from "mobx";
+import {getMessages} from "../../http/messageAPI";
 
 const Dialog = observer(() => {
 
@@ -24,7 +25,21 @@ const Dialog = observer(() => {
     const {chat} =useContext(Context)
 
 
-    // console.log(window.location)
+    useEffect(()=>{
+       async function fetchData(){
+
+         let messages = await getMessages(chat.chatWith)
+           console.log(messages)
+           chat.setMessageList(messages)
+       }
+
+
+
+       if(!chat.chatWith){
+           return
+       }
+       fetchData()
+    }, [chat.chatWith])
 
 
 
