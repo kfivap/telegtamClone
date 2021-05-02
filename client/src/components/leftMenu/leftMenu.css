@@ -43,7 +43,8 @@
 .dialog {
     display: block;
     padding-top: 8px;
-    padding-bottom: 14px;
+    /*padding-bottom: 14px;*/
+    min-height: 60px;
 }  .dialogSelected {
     background-color: #6490b1;
 }

@@ -1,24 +1,17 @@
-import React, {useContext} from 'react';
+import React, {} from 'react';
 import './Navbar.css'
-import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
+import LeftNavbar from "./LeftNavbar";
+
 const NavBar = observer(() => {
 
-    const {user} = useContext(Context)
+
 
     return (
         <div className={'navbar'}>
             Navbar
-            <button
-                onClick={()=>
-                {
-                    user.setIsAuth(false)
-                    localStorage.removeItem('token')
-                    localStorage.removeItem('userId')
-                }
+            <LeftNavbar/>
 
-                }
-            >Log out</button>
         </div>
     );
 })

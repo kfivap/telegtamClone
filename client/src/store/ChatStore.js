@@ -7,21 +7,21 @@ export default class ChatStore {
         this._chatWithName = ''
         this._messageList = [
             {
-                authorId: 1,
+                from: 1,
                 text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cupiditate ducimus eum laboriosam molestias nam sapiente voluptatem? Aspernatur aut dolores eum expedita ipsa iste maiores provident quisquam rem? Officia, rem.',
                 media: null,
                 read: false,
                 date: '18:45'
             },
             {
-                authorId: 1,
+                from: 1,
                 text: 'he22llo',
                 media: null,
                 read: true,
                 date: '18:45'
             },
             {
-                authorId: 2,
+                from: 2,
                 text: 'hello',
                 media: 'video.mp4',
                 read: false,

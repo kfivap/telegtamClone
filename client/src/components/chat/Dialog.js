@@ -23,9 +23,12 @@ const Dialog = observer(() => {
 
     const {chat} =useContext(Context)
 
+
+    // console.log(window.location)
+
+
+
     let lastId = null
-
-
     return (
         <div className={'chatMessages'}
         style={{height: height-200}}
@@ -35,11 +38,11 @@ const Dialog = observer(() => {
 
                 if(!message){ return }
                 let userInfoNeeded = true
-                if(lastId === message.authorId ){
+                if(lastId === message.from ){
                     userInfoNeeded = false
                 }
 
-                lastId = message.authorId
+                lastId = message.from
 
                 return(<Message
                     key={index}

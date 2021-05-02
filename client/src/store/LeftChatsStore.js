@@ -13,9 +13,9 @@ export default class LeftChatStore {
                 sender: 1,
                 media: null,
                 message: 'Hello',
-                unreadCounter: 5,
-                heRead: false,
-                pinned: true
+                // unreadCounter: 5,
+                // heRead: false,
+                // pinned: true
             },
             {
                 userId: 3,

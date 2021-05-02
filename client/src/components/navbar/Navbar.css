@@ -3,4 +3,9 @@
     margin: 0 auto;
     height: 48px;
     background: #5682a3;
+    display: flex;
+}
+
+.leftNavbar{
+
 }

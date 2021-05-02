@@ -25,6 +25,7 @@ const AuthPage = observer(() => {
         console.log(data)
         // console.log(email, password, nick)
         user.setIsAuth(true)
+        window.location.reload()
     }
 
 

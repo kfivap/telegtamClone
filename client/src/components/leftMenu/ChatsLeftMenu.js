@@ -1,8 +1,9 @@
 import React, {useContext, useLayoutEffect, useState} from 'react';
 import ChatPreview from "./ChatPreview";
 import {Context} from "../../index";
+import {observer} from "mobx-react-lite";
 
-const ChatsLeftMenu = () => {
+const ChatsLeftMenu = observer(() => {
 
     // const [height, setHeight] = useState()
 
@@ -38,6 +39,6 @@ const ChatsLeftMenu = () => {
         </div>
 )
     ;
-};
+})
 
 export default ChatsLeftMenu;

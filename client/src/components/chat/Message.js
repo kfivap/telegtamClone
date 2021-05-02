@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 const Message = observer(({message, userInfoNeeded}) => {
 
 
-    const {authorId, text, media, read, date} = message
+    const {from, text, media, read, date} = message
     const {user, chat} = useContext(Context)
 // console.log(userInfoNeeded)
 
@@ -24,7 +24,7 @@ const Message = observer(({message, userInfoNeeded}) => {
                 {
                     userInfoNeeded ?
 
-                        <img src={user.userId === authorId ?
+                        <img src={user.userId === from ?
                             user.userAvatar
                             :
                             chat.chatAvatar
@@ -43,7 +43,7 @@ const Message = observer(({message, userInfoNeeded}) => {
                     userInfoNeeded?
 
                         <div className='authorName'>
-                            {user.userId === authorId ?
+                            {user.userId === from ?
                                 user.userName
                                 :
                                 chat.chatWithName

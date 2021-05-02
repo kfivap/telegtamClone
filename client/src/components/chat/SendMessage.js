@@ -24,13 +24,14 @@ const SendMessage = observer(() => {
 
             const message = {
                 event: 'connection',
-                authorId: user.userId,
+                from: user.userId,
                 id: Date.now()+Math.random()
             }
             socket.current.send(JSON.stringify(message))
             console.log('connection setup')
         }
         socket.current.onmessage = (event) => {
+
             const message = JSON.parse(event.data)
             setMessages(prev => [message, ...prev])
 
@@ -53,7 +54,8 @@ const SendMessage = observer(() => {
 
         const message = {
             event: 'message',
-            authorId: user.userId,
+            from: user.userId,
+            to: chat.chatWith,
             text: value,
             id: Date.now()+Math.random(),
             read: false,
@@ -68,7 +70,8 @@ const SendMessage = observer(() => {
         setTimeout(()=>{
             const message2 = {
                 event: 'message',
-                authorId: chat.chatWith,
+                from: chat.chatWith,
+                to: user.userId,
                 text: 'echo: '+value,
                 id: Date.now()+Math.random(),
                 read: false,

@@ -17,6 +17,8 @@ app.use(fileUpload({}))
 app.use('/api', router)
 
 
+const WSFunctions = require('./webSocket/functions')
+
 const start = async () => {
     try {
         await sequelize.authenticate()
@@ -31,25 +33,18 @@ const start = async () => {
                 console.log(message)
                 switch (message.event) {
                     case 'message':
-                        broadcastMessage(message)
+                        // broadcastMessage(message)
+
+                        WSFunctions.broadcastMessage(wss, message)
                         break
 
                     case 'connection':
-                        broadcastMessage(message)
+                        // broadcastMessage(message)
                         break
                 }
             })
         })
-        function broadcastMessage(message, id) {
 
-            wss.clients.forEach(client=>{
-                // if(client.id === id){
-                client.send(JSON.stringify(message))
-
-                // }
-
-            })
-        }
 
 
 

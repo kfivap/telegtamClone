@@ -54,7 +54,7 @@ const ChatPreview = observer(({dialog}) => {
                 <div className={'dialogTime'}>
                     18:45
                 </div>
-                {unreadCounter!==0  &&!you?
+                {unreadCounter  &&!you?
                     <div className={'unreadCounter'}>
                         <div className={'unreadCounterText'}>
                         {unreadCounter}

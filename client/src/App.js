@@ -19,11 +19,12 @@ const App = observer(() => {
     useEffect(()=>{
         setTimeout(()=>{
             check().then(data=>{
-                // user.setUser(true)
-                user.setIsAuth(true)
                 // console.log(data)
-                user.setUserId(data.userId)
-                // user.setUserRole(data.userRole)
+
+                user.setIsAuth(true)
+                user.setUserId(data.id)
+                user.setUserName(data.nick)
+
             }).finally(()=> setLoading(false))
 
         }, 0)
