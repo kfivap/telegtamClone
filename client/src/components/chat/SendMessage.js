@@ -67,19 +67,19 @@ const SendMessage = observer(() => {
 
 
         //echo
-        setTimeout(()=>{
-            const message2 = {
-                event: 'message',
-                from: chat.chatWith,
-                to: user.userId,
-                text: 'echo: '+value,
-                id: Date.now()+Math.random(),
-                read: false,
-                date: '13:77',
-                media: null
-            }
-            socket.current.send(JSON.stringify(message2))
-        }, 3000)
+        // setTimeout(()=>{
+        //     const message2 = {
+        //         event: 'message',
+        //         from: chat.chatWith,
+        //         to: user.userId,
+        //         text: 'echo: '+value,
+        //         id: Date.now()+Math.random(),
+        //         read: false,
+        //         date: '13:77',
+        //         media: null
+        //     }
+        //     socket.current.send(JSON.stringify(message2))
+        // }, 3000)
 
         setValue('')
     }

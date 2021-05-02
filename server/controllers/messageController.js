@@ -10,19 +10,26 @@ class MessageController {
         const {searchId} = req.query
         let userId = checkUserMiddleware(req).id
 
+        if(!userId){
+            return res.status(403)
+        }
+
 
         let usersArray = [searchId, userId].sort(function(a, b){return a-b})
 
         let chat = await Chat.findOne({
             where: {usersArray}
         })
+        if(!chat){
+            return res.status(404).json({message: 'chat not found'})
+        }
 
         let messages = await Message.findAll({
             limit:15,
             where: {
                 chatId: chat.id
             },
-            order: [["id", "DESC"]]
+            order: [["id", "ASC"]]
         })
 
         return res.json(messages)

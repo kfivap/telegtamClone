@@ -5,6 +5,7 @@ const chatController = require('../controllers/chatController')
 
 
 router.get('/findUsers', chatController.findUsers)
+router.get('/getChats', chatController.getChats)
 
 
 

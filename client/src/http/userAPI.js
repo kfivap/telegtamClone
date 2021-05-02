@@ -25,3 +25,10 @@ export const check = async () => {
 }
 
 
+export const getNames = async (arr) => {
+    const {data} = await $host.get(`api/user/userNames?idList=${arr}`)
+
+    return data
+}
+
+

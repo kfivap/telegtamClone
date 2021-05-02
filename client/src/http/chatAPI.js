@@ -9,3 +9,9 @@ export const searchNick = async (nick) => {
 }
 
 
+export const getChats = async () => {
+    const {data} = await $authHost.get(`api/chat/getChats`)
+
+    return data
+}
+

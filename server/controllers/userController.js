@@ -110,6 +110,27 @@ class UserController {
 
 
 
+    async getUserNames(req, res){
+
+        let {idList} = req.query
+
+         idList = idList.split(',').map(id=>+id)
+
+        // console.log(idList)
+
+       let userNames =  await User.findAll({
+            where:{
+                id: idList
+            },
+            attributes: [['id', "userId"], ['nick', 'userName']]
+        })
+
+        return res.json(userNames)
+    }
+
+
+
+
 
 
 

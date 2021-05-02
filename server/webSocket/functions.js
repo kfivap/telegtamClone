@@ -25,7 +25,16 @@ class WebSocketFunctions  {
             text: message.text,
            chatId: chat.id
         })
-        // console.log(newMessage)
+
+        console.log(JSON.parse(JSON.stringify(newMessage)))
+
+
+
+
+        let updatedChat = await chat.update({
+            lastMessage: JSON.stringify(newMessage)
+        })
+
         wss.clients.forEach(client=>{
             // if(client.id === id){
             client.send(JSON.stringify(message))

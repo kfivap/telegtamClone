@@ -5,6 +5,11 @@ import ChatsLeftMenu from "./ChatsLeftMenu";
 import {observer} from "mobx-react-lite";
 
 const LeftMenuMain = observer(() => {
+
+
+
+
+
     return (
         <div className={'mainLeft'}>
             {/*Main left*/}

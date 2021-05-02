@@ -10,10 +10,10 @@ const ChatPreview = observer(({dialog}) => {
 
     const {user, chat} = useContext(Context)
 
-    const {userId, userName, userPhoto, time, sender, media, message, unreadCounter, pinned, heRead} = dialog
+    const {userId, userName, userPhoto, time, from, media, text, unreadCounter, pinned, heRead} = dialog
 
 
-    const you = sender === user.userId
+    const you = from === user.userId
     const selected = chat.chatWith === userId
 
 
@@ -87,7 +87,7 @@ const ChatPreview = observer(({dialog}) => {
                        </span>
                        :
                        null}
-                    {message}
+                    {text}
                     {media?
                         <span className={`
                        ${selected? null: 'blueMessage'}

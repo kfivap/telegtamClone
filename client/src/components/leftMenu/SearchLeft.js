@@ -11,7 +11,7 @@ const SearchLeft = observer(() => {
 
     useEffect(()=>{
         if(searchValue.trim() === ''){
-            // return
+            return
         }
        let timeout =  setTimeout(async ()=>{
           let data = await searchNick(searchValue)

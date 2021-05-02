@@ -12,6 +12,7 @@ const User = sequelize.define('user', {
 const Chat = sequelize.define('chat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     usersArray: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false},
+    lastMessage: { type: DataTypes.TEXT}
 
 })
 

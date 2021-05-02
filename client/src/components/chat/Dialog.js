@@ -29,7 +29,7 @@ const Dialog = observer(() => {
        async function fetchData(){
 
          let messages = await getMessages(chat.chatWith)
-           console.log(messages)
+           // console.log(messages)
            chat.setMessageList(messages)
        }
 

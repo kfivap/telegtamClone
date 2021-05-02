@@ -1,5 +1,6 @@
-const {User} = require('../models/models')
+const {User, Chat} = require('../models/models')
 const {Op} = require("sequelize");
+const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 
 class ChatController {
 
@@ -24,7 +25,24 @@ class ChatController {
         })
     }
 
-    async getChatMessages(req, res){
+    async getChats(req, res){
+
+        let userId = checkUserMiddleware(req).id
+
+        if(!userId){
+            return res.status(403)
+        }
+
+        let chats = await Chat.findAndCountAll({
+            where:{
+                usersArray: {
+                    [Op.contains]: [userId]
+                }
+            }
+        })
+
+
+        return res.json(chats)
 
     }
 
