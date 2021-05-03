@@ -11,21 +11,21 @@ export default class ChatStore {
                 text: 'Welcome to new Messenger',
                 media: null,
                 read: false,
-                date: '18:45'
+                // date: '18:45'
             },
             {
                 from: 0,
                 text: 'To start messaging, find user on the left side',
                 media: null,
                 read: false,
-                date: '18:45'
+                // date: '18:45'
             },
             {
                 from: 0,
                 text: 'Enjoy!',
                 media: null,
                 read: false,
-                date: '18:45'
+                // date: '18:45'
             },
 
         ]

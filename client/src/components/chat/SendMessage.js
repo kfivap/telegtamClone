@@ -82,10 +82,21 @@ const SendMessage = observer(() => {
         }
         socket.current.onclose = () => {
             console.log('socket closed')
+            setConnected(false)
+
+            console.log('trying reconnect in 5 seconds')
+            setTimeout(()=>{
+                connect()
+            }, 5000)
+
 
         }
         socket.current.onerror = () => {
             console.log('socket error')
+            console.log('trying reconnect in 5 seconds')
+            setTimeout(()=>{
+                connect()
+            }, 5000)
         }
 
     }
