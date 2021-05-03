@@ -1,4 +1,4 @@
-export const parseDate = (date)=> {
+export const parseDate = (date, short )=> {
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"];
     const dateObj = new Date(date);
@@ -18,6 +18,10 @@ export const parseDate = (date)=> {
 
     if(isNaN(year)){
         return
+    }
+    if(short){
+        const output = `${hours}:${minutes}`
+        return output
     }
 
     const output = `${day} ${month} ${year} ${hours}:${minutes}:${seconds}`

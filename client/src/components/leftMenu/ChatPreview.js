@@ -3,6 +3,7 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import { useHistory } from "react-router-dom";
 import {toJS} from "mobx";
+import {parseDate} from "../../functions/parseDate";
 
 const ChatPreview = observer(({dialog}) => {
 
@@ -10,7 +11,9 @@ const ChatPreview = observer(({dialog}) => {
 
     const {user, chat} = useContext(Context)
 
-    const {userId, userName, userPhoto, time, from, media, text, unreadCounter, pinned, heRead} = dialog
+    let {userId, userName, userPhoto, createdAt, from, media, text, unreadCounter, pinned, heRead} = dialog
+
+    createdAt = parseDate(createdAt, true)
 
 
     const you = from === user.userId
@@ -52,7 +55,7 @@ const ChatPreview = observer(({dialog}) => {
             ${selected? 'dialogMetaSelected': null}
             `}>
                 <div className={'dialogTime'}>
-                    18:45
+                    {createdAt}
                 </div>
                 {unreadCounter  &&!you?
                     <div className={'unreadCounter'}>
