@@ -38,7 +38,8 @@ class ChatController {
                 usersArray: {
                     [Op.contains]: [userId]
                 }
-            }
+            },
+            order: [['updatedAt', 'DESC']]
         })
 
 

@@ -2,10 +2,11 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import WebSock from "../../WebSock";
+import {toJS} from "mobx";
 
 const SendMessage = observer(() => {
 
-    const {user, chat} =useContext(Context)
+    const {user, chat, leftChats} =useContext(Context)
 
 
     const [messages, setMessages] = useState([])
@@ -25,7 +26,7 @@ const SendMessage = observer(() => {
             const message = {
                 event: 'connection',
                 from: user.userId,
-                id: Date.now()+Math.random()
+                id: user.userId
             }
             socket.current.send(JSON.stringify(message))
             console.log('connection setup')
@@ -35,7 +36,24 @@ const SendMessage = observer(() => {
             const message = JSON.parse(event.data)
             setMessages(prev => [message, ...prev])
 
+            console.log(message)
+
             chat.pushMessageList(message)
+
+            let chatList = toJS(leftChats.chatsList)
+            chatList.forEach(chat=>{
+
+                if(chat.chatId===message.chatId){
+                    console.log(chat)
+                    chat.text=message.text
+                    chat.updatedAt = message.createdAt
+                    chat.from = message.from
+                }
+
+                return chat
+            })
+
+            leftChats.setChatsList(chatList)
 
 
 
@@ -57,29 +75,13 @@ const SendMessage = observer(() => {
             from: user.userId,
             to: chat.chatWith,
             text: value,
-            id: Date.now()+Math.random(),
+            id: user.userId,
             read: false,
-            date: '18:20',
+            createdAt: new Date(),
             media: null
 
         }
         socket.current.send(JSON.stringify(message))
-
-
-        //echo
-        // setTimeout(()=>{
-        //     const message2 = {
-        //         event: 'message',
-        //         from: chat.chatWith,
-        //         to: user.userId,
-        //         text: 'echo: '+value,
-        //         id: Date.now()+Math.random(),
-        //         read: false,
-        //         date: '13:77',
-        //         media: null
-        //     }
-        //     socket.current.send(JSON.stringify(message2))
-        // }, 3000)
 
         setValue('')
     }

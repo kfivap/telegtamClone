@@ -42,7 +42,7 @@ const ChatsLeftMenu = observer(() => {
                     return row.lastMessage = JSON.parse(row.lastMessage)
                 }
             )
-            console.log(data)
+            // console.log(data)
 
 
             function flatObject(source, target) {
@@ -73,8 +73,7 @@ const ChatsLeftMenu = observer(() => {
 
             let target = {};
 
-            flatObject(data.rows[0], target);
-            console.log(target);
+
 
             let editedArray = []
             let idToNamesArr = []
@@ -86,8 +85,8 @@ const ChatsLeftMenu = observer(() => {
 
 
                 let chatWith = row.usersArray.filter(id => id !== user.userId)
-                console.log(user.userId)
-                console.log(chatWith[0])
+                // console.log(user.userId)
+                // console.log(chatWith[0])
 
                 target.userId = chatWith[0]
 
@@ -100,9 +99,9 @@ const ChatsLeftMenu = observer(() => {
             })
 
 
-            console.log(editedArray)
+            // console.log(editedArray)
             let nickNames = await getNames(idToNamesArr)
-            console.log(nickNames)
+            // console.log(nickNames)
 
             for (let i = 0; i < nickNames.length; i++) {
                 for (let j = 0; j < editedArray.length; j++) {

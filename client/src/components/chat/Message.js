@@ -6,13 +6,14 @@ import {observer} from "mobx-react-lite";
 const Message = observer(({message, userInfoNeeded}) => {
 
 
-    const {from, text, media, read, date} = message
+    const {from, text, media, read, createdAt} = message
     const {user, chat} = useContext(Context)
 // console.log(userInfoNeeded)
 
     // console.log(authorId, text, media, read, date)
-    // console.log(user.userAvatar)
+    // console.log(createdAt)
     // console.log(chat.chatAvatar)
+
 
     return (
         <div className='messageBlock'>
@@ -64,7 +65,7 @@ const Message = observer(({message, userInfoNeeded}) => {
             </div>
 
 
-            <div className={'messageTime'}>{date}</div>
+            <div className={'messageTime'}>{createdAt}</div>
         </div>
     );
 })

@@ -27,7 +27,7 @@ const start = async () => {
             port: 5001,
         }, ()=>console.log('server started on 5001'))
         wss.on('connection',  function connection(ws) {
-            // ws.id = Date.now()
+            ws.id = Date.now()+Math.random()
             ws.on('message', function (message) {
                 message = JSON.parse(message)
                 // console.log(message)
@@ -35,11 +35,11 @@ const start = async () => {
                     case 'message':
                         // broadcastMessage(message)
 
-                        WSFunctions.broadcastMessage(wss, message)
+                        WSFunctions.broadcastMessage(wss, message, ws)
                         break
 
                     case 'connection':
-                        // broadcastMessage(message)
+                        ws.id=message.id
                         break
                 }
             })

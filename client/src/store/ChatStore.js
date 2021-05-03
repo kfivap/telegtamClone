@@ -7,26 +7,27 @@ export default class ChatStore {
         this._chatWithName = ''
         this._messageList = [
             {
-                from: 1,
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cupiditate ducimus eum laboriosam molestias nam sapiente voluptatem? Aspernatur aut dolores eum expedita ipsa iste maiores provident quisquam rem? Officia, rem.',
+                from: 0,
+                text: 'Welcome to new Messenger',
                 media: null,
                 read: false,
                 date: '18:45'
             },
             {
-                from: 1,
-                text: 'he22llo',
+                from: 0,
+                text: 'To start messaging, find user on the left side',
                 media: null,
-                read: true,
+                read: false,
                 date: '18:45'
             },
             {
-                from: 2,
-                text: 'hello',
-                media: 'video.mp4',
+                from: 0,
+                text: 'Enjoy!',
+                media: null,
                 read: false,
                 date: '18:45'
-            }
+            },
+
         ]
         this._cachedMessagesList = {}
         makeAutoObservable(this)
