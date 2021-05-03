@@ -7,7 +7,7 @@ class MessageController {
 
     async getMessages(req, res, next) {
 
-        const {searchId} = req.query
+        const {searchId, offset, limit} = req.query
         let userId = checkUserMiddleware(req).id
 
         if(!userId){
@@ -24,13 +24,20 @@ class MessageController {
             return res.status(404).json({message: 'chat not found'})
         }
 
-        let messages = await Message.findAll({
-            limit:15,
+
+
+        let messages = await Message.findAndCountAll({
+            // offset:countMessages-minus,
+            offset:parseInt(offset),
+            limit:10,
             where: {
                 chatId: chat.id
             },
-            order: [["id", "ASC"]]
+            order: [["id", "DESC"]]
         })
+
+        messages.count2 = messages.rows.length
+        
 
         return res.json(messages)
     }

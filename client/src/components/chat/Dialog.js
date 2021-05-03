@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useLayoutEffect, useState} from 'react';
+import React, {useContext, useEffect, useLayoutEffect, useRef, useState} from 'react';
 import {Context} from "../../index";
 import Message from "./Message";
 import {observer} from "mobx-react-lite";
@@ -25,29 +25,63 @@ const Dialog = observer(() => {
     const {chat} =useContext(Context)
 
 
+
+
+    async function fetchData(){
+
+
+        if(!chat.chatWith){
+            console.log('here')
+            return
+        }
+        let messages = await getMessages(chat.chatWith, chat.offset)
+
+        messages.rows=messages.rows.reverse()
+        chat.pushMessageList(messages.rows)
+        chat.increaseOffset(10)
+
+    }
+
     useEffect(()=>{
-       async function fetchData(){
+       fetchData().then(()=>{
 
-         let messages = await getMessages(chat.chatWith)
-           // console.log(messages)
-           chat.setMessageList(messages)
-       }
+       })
+        return(()=>{
+            console.log('upper useEffect')
+            chat.resetOffset()
 
 
-
-       if(!chat.chatWith){
-           return
-       }
-       fetchData()
+        })
     }, [chat.chatWith])
 
+
+
+
+    const dialogRef = useRef()
+
+    // console.log('scrollTop',dialogRef.current?.scrollTop)
+    // console.log('scrollHeight', dialogRef.current?.scrollHeight)
+    // console.log('clientHeight', dialogRef.current?.clientHeight)
 
 
     let lastId = null
     return (
         <div className={'chatMessages'}
         style={{height: height-200}}
+             ref={dialogRef}
+             onScroll={()=>{
+                 console.log('scrollTop',dialogRef.current?.scrollTop)
+                 console.log('scrollHeight', dialogRef.current?.scrollHeight)
+                 console.log('clientHeight', dialogRef.current?.clientHeight)
+
+             }
+             }
         >
+            <button
+            onClick={()=>{
+                fetchData()
+            }}
+            >fetch</button>
 
             {toJS(chat.messageList).map((message, index)=>{
 

@@ -30,6 +30,7 @@ export default class ChatStore {
 
         ]
         this._cachedMessagesList = {}
+        this._offset = 0
         makeAutoObservable(this)
     }
 
@@ -41,17 +42,22 @@ export default class ChatStore {
         this._chatAvatar = src
     }
     pushMessageList(messages){
+
+        if(messages.length || messages.length>1){
+            this._messageList = [ ...messages, ...toJS(this._messageList)]
+        }
+
         if(this._chatWith === null){
             return
         }
+
         if(messages.event === 'message'){
             this._messageList = [...toJS(this._messageList), messages]
         }
     }
-    setCacheMessages(chatWith){
-        this._cachedMessagesList[chatWith] = this.messageList
-
-    }
+    // setCacheMessages(chatWith){
+    //     this._cachedMessagesList[chatWith] = this.messageList
+    // }
 
 
     setMessageList(messages){
@@ -60,6 +66,12 @@ export default class ChatStore {
 
     setChatWithName(name){
         this._chatWithName = name
+    }
+    increaseOffset(num){
+        this._offset = this._offset+num
+    }
+    resetOffset(){
+        this._offset = 0
     }
 
     get chatWith(){
@@ -74,8 +86,11 @@ export default class ChatStore {
     get chatWithName(){
         return this._chatWithName
     }
-    get cachedMessagesList(){
-        return this._cachedMessagesList
+    get offset(){
+        return this._offset
     }
+    // get cachedMessagesList(){
+    //     return this._cachedMessagesList
+    // }
 
 }

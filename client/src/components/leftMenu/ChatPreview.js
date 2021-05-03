@@ -21,20 +21,20 @@ const ChatPreview = observer(({dialog}) => {
 
 
     const chatClickHandler = ()=>{
-        if(chat.chatWith){
-            chat.setCacheMessages(chat.chatWith)
-        }
+        // if(chat.chatWith){
+            // chat.setCacheMessages(chat.chatWith)
+        // }
 
         chat.setChatWith(userId)
         chat.setChatAvatar(userPhoto)
         chat.setChatWithName(userName)
 
-        const cachedMessages  = toJS(chat.cachedMessagesList)
-        if(cachedMessages[chat.chatWith]){
-            chat.setMessageList(cachedMessages[chat.chatWith])
-        } if(!cachedMessages[chat.chatWith]){
+        // const cachedMessages  = toJS(chat.cachedMessagesList)
+        // if(cachedMessages[chat.chatWith]){
+        //     chat.setMessageList(cachedMessages[chat.chatWith])
+        // } if(!cachedMessages[chat.chatWith]){
             chat.setMessageList([])
-        }
+        // }
 
 
         history.push(`/im/${userId}`)

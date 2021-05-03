@@ -119,6 +119,34 @@ const SendMessage = observer(() => {
         setValue('')
     }
 
+
+    const sendManyMessagesDev =  ()=>{
+        for(let i = 0; i<100; i++){
+
+            const message = {
+                event: 'message',
+                from: user.userId,
+                to: chat.chatWith,
+                text: `
+                ${i} chat with ${chat.chatWith}`,
+                id: user.userId,
+                read: false,
+                createdAt: new Date(),
+                media: null
+
+            }
+
+
+            setTimeout(()=>{
+                socket.current.send(JSON.stringify(message))
+            }, i*100)
+
+
+
+        }
+    }
+
+
     useEffect(()=>{
         if(!connected){
             connect()
@@ -139,7 +167,11 @@ const SendMessage = observer(() => {
                 />
                 <div className='sendButton'
                 onClick={sendMessage}
-                >Send</div>
+                >Send</div><
+
+                div className='sendButton'
+                onClick={sendManyMessagesDev}
+                >send many</div>
             </div>
 
             <div className={'chatPhoto'}>

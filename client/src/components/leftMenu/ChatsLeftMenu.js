@@ -90,7 +90,7 @@ const ChatsLeftMenu = observer(() => {
                 // console.log(user.userId)
                 // console.log(chatWith[0])
 
-                console.log(target)
+                // console.log(target)
                 target.userId = chatWith[0]
 
                 if (!chatWith[0]) {
@@ -118,7 +118,7 @@ const ChatsLeftMenu = observer(() => {
 
 
             leftChats.setChatsList(editedArray)
-            console.log(editedArray)
+            // console.log(editedArray)
         }
 
         fetchData()
