@@ -54,7 +54,7 @@ console.log(message)
 console.log(message)
         wss.clients.forEach(client=>{
             // if(client.id === id)
-            if(client.id===socketMessage.to){
+            if(client.id===socketMessage.to || client.id === socketMessage.from){
                 client.send(JSON.stringify(socketMessage))
             }
             // client.send(JSON.stringify(socketMessage))
@@ -63,9 +63,7 @@ console.log(message)
                 'client.id', client.id,
                "ws.id",ws.id
                 )
-// console.log(client.id===socketMessage.to)
 
-            // }
 
         })
     }

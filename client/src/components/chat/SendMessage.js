@@ -39,19 +39,41 @@ const SendMessage = observer(() => {
             console.log(message)
 
             chat.pushMessageList(message)
-
+            //
             let chatList = toJS(leftChats.chatsList)
-            chatList.forEach(chat=>{
 
-                if(chat.chatId===message.chatId){
-                    console.log(chat)
-                    chat.text=message.text
-                    chat.updatedAt = message.createdAt
-                    chat.from = message.from
+
+            // chatList.forEach(chat=>{
+            //
+            //     if(chat.chatId===message.chatId){
+            //         console.log(chat)
+            //         chat.text=message.text
+            //         chat.updatedAt = message.createdAt
+            //         chat.from = message.from
+            //     }
+            //
+            //     return chat
+            // })
+            // console.log(chatList)
+
+
+
+            for(let i=0; i<chatList.length; i++){
+                // console.log(chatList)
+                if(chatList[i].chatId === message.chatId){
+                    chatList[i].text=message.text
+                    chatList[i].updatedAt = message.createdAt
+                    chatList[i].from = message.from
+
+                    let tempElement = chatList[i]
+                    chatList.splice(i, 1)
+                    chatList.unshift(tempElement)
+                    break
                 }
 
-                return chat
-            })
+            }
+
+
 
             leftChats.setChatsList(chatList)
 

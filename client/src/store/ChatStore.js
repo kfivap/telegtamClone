@@ -41,6 +41,9 @@ export default class ChatStore {
         this._chatAvatar = src
     }
     pushMessageList(messages){
+        if(this._chatWith === null){
+            return
+        }
         if(messages.event === 'message'){
             this._messageList = [...toJS(this._messageList), messages]
         }
