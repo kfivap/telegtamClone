@@ -34,34 +34,39 @@ const EditProfile = observer(() => {
                 Edit Profile
             </button>
 
+            {showEdit?
 
-            <div className={'editModal'}>
-                Edit menu
-                <div>
-                    Update Avatar
-                    <input
-                        type={'file'}
-                        accept='image/jpeg,image/png'
-                        onChange={selectFile}
-                    />
+                <div className={'editModal'}>
+                    Edit menu
+                    <div>
+                        Update Avatar
+                        <input
+                            type={'file'}
+                            accept='image/jpeg,image/png'
+                            onChange={selectFile}
+                        />
+                    </div>
+                    <div>
+                        Update Name (not added now)
+                        <input
+                            type={'text'}
+                            value={name}
+                            onChange={e=>setName(e.target.value)}
+                        />
+                    </div>
+
+                    <button
+                        onClick={editProfile}
+                    >
+                        update!
+                    </button>
+
+
                 </div>
-                <div>
-                    Update Name (not added now)
-                    <input
-                        type={'text'}
-                        value={name}
-                        onChange={e=>setName(e.target.value)}
-                    />
-                </div>
+            :
+                null
+            }
 
-                <button
-                onClick={editProfile}
-                >
-                    update!
-                </button>
-
-
-            </div>
 
 
         </div>

@@ -124,7 +124,7 @@ class UserController {
             where:{
                 id: idList
             },
-            attributes: [['id', "userId"], ['nick', 'userName']]
+            attributes: [['id', "userId"], ['nick', 'userName'], 'avatar']
         })
 
         return res.json(userNames)

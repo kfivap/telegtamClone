@@ -110,6 +110,7 @@ const ChatsLeftMenu = observer(() => {
                 for (let j = 0; j < editedArray.length; j++) {
                     if (nickNames[i].userId === editedArray[j].userId) {
                         editedArray[j].userName = nickNames[i].userName
+                        editedArray[j].userPhoto = process.env.REACT_APP_API_URL + nickNames[i].avatar
                         break
                     }
                 }
