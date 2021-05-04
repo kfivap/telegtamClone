@@ -29,7 +29,7 @@ class MessageController {
         let messages = await Message.findAndCountAll({
             // offset:countMessages-minus,
             offset:parseInt(offset),
-            limit:10,
+            limit:limit,
             where: {
                 chatId: chat.id
             },

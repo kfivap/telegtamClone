@@ -121,14 +121,16 @@ const SendMessage = observer(() => {
 
 
     const sendManyMessagesDev =  ()=>{
-        for(let i = 0; i<100; i++){
+        for(let i = 0; i<1000; i++){
 
             const message = {
                 event: 'message',
                 from: user.userId,
                 to: chat.chatWith,
                 text: `
-                ${i} chat with ${chat.chatWith}`,
+                ${i} chat with ${chat.chatWith}
+                
+                `,
                 id: user.userId,
                 read: false,
                 createdAt: new Date(),
@@ -139,7 +141,7 @@ const SendMessage = observer(() => {
 
             setTimeout(()=>{
                 socket.current.send(JSON.stringify(message))
-            }, i*100)
+            }, i*10)
 
 
 

@@ -13,6 +13,7 @@ const Dialog = observer(() => {
             function updateSize() {
                 setSize([window.innerWidth, window.innerHeight]);
             }
+
             window.addEventListener('resize', updateSize);
             updateSize();
             return () => window.removeEventListener('resize', updateSize);
@@ -22,78 +23,102 @@ const Dialog = observer(() => {
 
     const [width, height] = useWindowSize();
 
-    const {chat} =useContext(Context)
+    const {chat} = useContext(Context)
+    const dialogRef = useRef()
 
+    const [stopFetching, setStopFetching] = useState(false)
 
+    async function fetchData() {
 
-
-    async function fetchData(){
-
-
-        if(!chat.chatWith){
-            console.log('here')
+        let limit = 50
+        if (!chat.chatWith) {
             return
         }
-        let messages = await getMessages(chat.chatWith, chat.offset)
-
-        messages.rows=messages.rows.reverse()
+        let messages = await getMessages(chat.chatWith, chat.offset, limit)
+if(messages.rows.length===0){
+    setStopFetching(true)
+}
+        messages.rows = messages.rows.reverse()
         chat.pushMessageList(messages.rows)
-        chat.increaseOffset(10)
+        chat.increaseOffset(limit)
 
     }
 
-    useEffect(()=>{
-       fetchData().then(()=>{
+    useEffect(() => {
+        fetchData().then(() => {
+            dialogRef.current.scrollTop = dialogRef.current.scrollHeight
 
-       })
-        return(()=>{
+            if (dialogRef.current?.scrollTop === 0) {
+                console.log('hereee')
+            }
+        })
+        return (() => {
             console.log('upper useEffect')
             chat.resetOffset()
-
+            setStopFetching(false)
 
         })
     }, [chat.chatWith])
 
 
-
-
-    const dialogRef = useRef()
-
-    // console.log('scrollTop',dialogRef.current?.scrollTop)
+    // console.log('scrollTop',)
     // console.log('scrollHeight', dialogRef.current?.scrollHeight)
     // console.log('clientHeight', dialogRef.current?.clientHeight)
+
+
+    const [scrollHeight, setScrollHeight] = useState()
+    const [loading, setLoading] = useState(false)
 
 
     let lastId = null
     return (
         <div className={'chatMessages'}
-        style={{height: height-200}}
+             style={{height: height - 200}}
              ref={dialogRef}
-             onScroll={()=>{
-                 console.log('scrollTop',dialogRef.current?.scrollTop)
-                 console.log('scrollHeight', dialogRef.current?.scrollHeight)
-                 console.log('clientHeight', dialogRef.current?.clientHeight)
+             onScroll={() => {
+
+                 if (dialogRef.current?.scrollTop < 30
+                     &&
+                     !loading
+                     &&
+                     !stopFetching
+                 ) {
+
+                     setLoading(true)
+                     fetchData().then((data) => {
+                         let scrollDifference = dialogRef.current?.scrollHeight - scrollHeight
+                         dialogRef.current.scrollTop = scrollDifference
+                         setLoading(false)
+
+                     })
+
+                 }
+                 setScrollHeight(dialogRef.current?.scrollHeight)
+
 
              }
              }
         >
             <button
-            onClick={()=>{
-                fetchData()
-            }}
-            >fetch</button>
+                onClick={() => {
+                    fetchData()
+                }}
+            >fetch
+            </button>
 
-            {toJS(chat.messageList).map((message, index)=>{
+            {toJS(chat.messageList).map((message, index) => {
 
-                if(!message){ return }
+                if (!message) {
+                    return
+                }
                 let userInfoNeeded = true
-                if(lastId === message.from ){
+                if (lastId === message.from) {
                     userInfoNeeded = false
                 }
 
                 lastId = message.from
 
-                return(<Message
+                return (<Message
                     key={index}
                     message={message}
                     userInfoNeeded={userInfoNeeded}
