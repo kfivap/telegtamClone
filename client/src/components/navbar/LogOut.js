@@ -3,12 +3,12 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 
 
-const LeftNavbar = observer(() => {
+const LogOut = observer(() => {
 
     const {user} = useContext(Context)
 
     return (
-        <div className='leftNavbar'>
+        <div>
             <button
                 onClick={()=>
                 {
@@ -23,4 +23,4 @@ const LeftNavbar = observer(() => {
     );
 });
 
-export default LeftNavbar;
+export default LogOut;

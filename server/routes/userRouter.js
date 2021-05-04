@@ -8,6 +8,8 @@ router.post('/registration', userController.registration)
 router.post('/login', userController.login)
 router.get('/auth', authMiddleware, userController.check)
 router.get('/userNames', userController.getUserNames)
+router.put('/edit', userController.setProfileInfo)
+router.get('/avatar', userController.getAvatar)
 
 
 

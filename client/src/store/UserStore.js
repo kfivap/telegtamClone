@@ -20,7 +20,8 @@ export default class UserStore {
         this._userId = id
     }
     setUserAvatar(src){
-        this._userAvatar = src
+        // console.log(process.env.REACT_APP_API_URL + src)
+        this._userAvatar = process.env.REACT_APP_API_URL + src
     }
     setUserName(name){
         this._userName = name

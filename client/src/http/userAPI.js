@@ -32,3 +32,18 @@ export const getNames = async (arr) => {
 }
 
 
+export const getAvatar = async (id) => {
+    const {data} = await $host.get(`api/user/avatar?userId=${id}`)
+
+    return data
+}
+
+
+export const editProfileAPI = async (edited) => {
+
+    // console.log(bio)
+    const {data} = await $authHost.put(`api/user/edit`, edited)
+    return data
+
+}
+

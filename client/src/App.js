@@ -6,7 +6,7 @@ import {BrowserRouter} from "react-router-dom";
 import {Context} from "./index";
 import AuthPage from "./components/auth/AuthPage";
 import {observer} from "mobx-react-lite";
-import {check} from "./http/userAPI";
+import {check, getAvatar} from "./http/userAPI";
 
 
 
@@ -24,10 +24,17 @@ const App = observer(() => {
                 user.setIsAuth(true)
                 user.setUserId(data.id)
                 user.setUserName(data.nick)
+                getAvatar(data.id).then((avatar)=>{
+                    user.setUserAvatar(avatar)
+                })
+                console.log(data)
+                // user.setUserAvatar(data.avatar)
 
             }).finally(()=> setLoading(false))
 
         }, 0)
+
+
 
     }, [])
 

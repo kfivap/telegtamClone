@@ -4,8 +4,22 @@
     height: 48px;
     background: #5682a3;
     display: flex;
+    justify-content: space-around;
 }
 
-.leftNavbar{
+.editModal{
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: #c9d5e3;
+    min-width: content-box;
+    max-width: 600px;
+    padding: 40px;
+
+    border-radius: 8px;
+    box-shadow: 1px 6px 6px rgba(66, 56, 56, 0.5);
 
 }

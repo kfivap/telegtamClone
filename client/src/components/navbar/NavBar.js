@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import './Navbar.css'
 import {observer} from "mobx-react-lite";
-import LeftNavbar from "./LeftNavbar";
+import LogOut from "./LogOut";
 import {Context} from "../../index";
+import EditProfile from "./EditProfile";
 
 const NavBar = observer(() => {
 
@@ -12,8 +13,8 @@ const {user} =useContext(Context)
         <div className={'navbar'}>
 
             <h2>{user.userName}</h2>
-
-            <LeftNavbar/>
+<EditProfile/>
+            <LogOut/>
 
         </div>
     );

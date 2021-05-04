@@ -7,6 +7,8 @@ const uuid = require('uuid')
 const path = require('path')
 const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 
+
+
 const generateJwt = (id, email, role) => {
     return jwt.sign({id, email, role},
         process.env.SECRET_KEY,
@@ -130,6 +132,77 @@ class UserController {
 
 
 
+    async setProfileInfo(req, res){
+        let {name, userId} = req.body
+        if (checkUserMiddleware(req).id !== parseInt(userId)) {
+
+            return res.status(403).json('Not allowed')
+        }
+
+        let fileName = null
+        try {
+            const {img} = req.files
+            fileName = uuid.v4() + '.jpg'
+            await img.mv(path.resolve(__dirname, '..', 'staticBig', fileName))
+
+            const sharp = require('sharp');
+
+
+            path.resolve(__dirname, '..', 'static', fileName)
+
+            sharp(path.resolve(__dirname, '..', 'staticBig', fileName))
+                .resize(400,400)
+                .toFile(path.resolve(__dirname, '..', 'static', fileName))
+
+
+
+
+
+
+            console.log(fileName)
+        } catch (e) {
+            console.log(e.message)
+        }
+
+        if (fileName) {
+            const updated = await User.update(
+                {
+                    avatar: fileName
+                },
+                {where: {id:userId}}
+            )
+            return res.json(updated)
+        }
+        if (!fileName) {
+            // const updated = await User.update(
+            //     {
+            //         name, location, age, sex, shortBio
+            //     },
+            //     {where: {userId}}
+            // )
+            // return res.json(updated)
+            return res.status(400)
+        }
+
+
+    }
+
+
+    async getAvatar(req, res){
+        const {userId} = req.query
+        console.log(userId===undefined)
+        if(!userId){
+            return res.status(404).json({message: 'id not stated'})
+        }
+
+        const avatar = await User.findOne({
+            where:{
+                id:userId
+            },
+            attributes: ['avatar']
+        })
+        return res.json(avatar.avatar)
+    }
 
 
 
