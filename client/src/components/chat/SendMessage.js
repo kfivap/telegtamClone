@@ -36,9 +36,12 @@ const SendMessage = observer(() => {
             const message = JSON.parse(event.data)
             setMessages(prev => [message, ...prev])
 
-            console.log(message)
+            // console.log(message)
 
-            chat.pushMessageList(message)
+            if(chat.chatWith === message.from){
+                chat.pushMessageList(message)
+            }
+
             //
             let chatList = toJS(leftChats.chatsList)
 

@@ -40,6 +40,8 @@ const ChatPreview = observer(({dialog}) => {
         history.push(`/im/${userId}`)
     }
 
+    console.log(toJS(dialog))
+
     return (
         <div className={`dialog ${selected? 'dialogSelected': null}`}
         onClick={chatClickHandler}

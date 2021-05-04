@@ -128,6 +128,8 @@ const ChatsLeftMenu = observer(() => {
     }, [])
 
 
+
+
     return (
         <div className={'chatsFull'} style={{height: height - 108}}>
 
