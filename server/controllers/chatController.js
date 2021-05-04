@@ -66,7 +66,7 @@ class ChatController {
         console.log(OpOrQuery)
         let one = [1,1]
 
-        let chats = await Chat.findAndCountAll({
+        let chats = await Chat.findAll({
             where:{
                 [Op.or]: OpOrQuery
 

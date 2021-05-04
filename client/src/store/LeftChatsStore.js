@@ -244,15 +244,23 @@ export default class LeftChatStore {
             }
 
         ]
+        this._isSearch = false
         makeAutoObservable(this)
     }
 
     setChatsList(list){
         this._chatsList = list
     }
+    setIsSearch(boolean){
+        this._isSearch = boolean
+    }
 
     get chatsList(){
         return this._chatsList
+    }
+
+    get isSearch(){
+        return this._isSearch
     }
 
 

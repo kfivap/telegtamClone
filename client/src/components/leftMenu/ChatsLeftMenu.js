@@ -30,6 +30,11 @@ const ChatsLeftMenu = observer(() => {
 
     useEffect(() => {
 
+        if(leftChats.isSearch){
+            return
+        }
+
+
         async function fetchData() {
 
             let data = await getChats()
@@ -37,6 +42,7 @@ const ChatsLeftMenu = observer(() => {
             if (data.rows.count === 0) {
                 return
             }
+        console.log(data)
 
             data.rows.forEach(row => {
                 delete row.createdAt
@@ -125,7 +131,7 @@ const ChatsLeftMenu = observer(() => {
         fetchData()
 
 
-    }, [])
+    }, [leftChats.isSearch])
 
 
 
