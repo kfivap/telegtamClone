@@ -118,15 +118,12 @@ const App = observer(() => {
         }
 
 
+
     }
 
     if(socketStore.sending){
         try {
-
                 socket.current.send(JSON.stringify(socketStore.message))
-
-
-
         } catch (e) {
             console.log(e)
         } finally {
@@ -134,8 +131,20 @@ const App = observer(() => {
                 socketStore.setSending(false)
             })
         }
+    }
 
-
+    if(socketStore.reading){
+        try {
+                socket.current.send(JSON.stringify(socketStore.reading))
+            // console.log(socketStore.reading)
+        } catch (e) {
+            console.log(e)
+        } finally {
+            runInAction(() => {
+                socketStore.setReading(false)
+            })
+        }
+        // console.log(socketStore.reading)
     }
 
 

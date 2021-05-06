@@ -10,21 +10,21 @@ export default class ChatStore {
                 from: 0,
                 text: 'Welcome to new Messenger',
                 media: null,
-                read: false,
+                read: true,
                 // date: '18:45'
             },
             {
                 from: 0,
                 text: 'To start messaging, find user on the left side',
                 media: null,
-                read: false,
+                read: true,
                 // date: '18:45'
             },
             {
                 from: 0,
                 text: 'Enjoy!',
                 media: null,
-                read: false,
+                read: true,
                 // date: '18:45'
             },
 
@@ -76,7 +76,20 @@ export default class ChatStore {
     }
 
     markReadMessage(id){
-        console.log(toJS(this._messageList).filter(message=> message.id === id))
+      let readArray =  toJS(this._messageList)
+
+          readArray.forEach(message=> {
+// console.log(message.id, id)
+            if (message.id === id) {
+                console.log(message.id, id)
+                message.read = true
+            }
+            return message
+        }
+    )
+        // console.log(readArray)
+        this._messageList = readArray
+
     }
 
     get chatWith(){

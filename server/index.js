@@ -43,7 +43,8 @@ const start = async () => {
                         break
 
                     case 'readMessage':
-                        WSFunctions.ReadMessage()
+
+                        WSFunctions.ReadMessage(wss, message, ws)
                 }
             })
         })

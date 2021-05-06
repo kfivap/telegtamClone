@@ -8,7 +8,7 @@ import {toJS} from "mobx";
 const Message = observer(({message, userInfoNeeded}) => {
 
 
-    let {from, text, media, read, createdAt} = message
+    let {from, to, text, media, read, createdAt, id} = message
     const {user, chat, socketStore} = useContext(Context)
 // console.log(userInfoNeeded)
 
@@ -22,8 +22,23 @@ const Message = observer(({message, userInfoNeeded}) => {
 
 
     const readHandler = ()=>{
-      chat.markReadMessage(message.id)
-        // so
+        if(readState){
+            return
+        }
+      chat.markReadMessage(id)
+        const reading = {
+          event: "readMessage",
+            from: from,
+            to: to,
+            text: text,
+            id: id,
+            read: true,
+            createdAt: createdAt,
+            media: media
+
+        }
+        socketStore.setReading(reading)
+        setReadState(true)
 
     }
 
