@@ -6,7 +6,7 @@ import {toJS} from "mobx";
 
 const SendMessage = observer(() => {
 
-    const {user, chat, leftChats} =useContext(Context)
+    const {user, chat, leftChats, socketStore} =useContext(Context)
 
 
     const [messages, setMessages] = useState([])
@@ -16,93 +16,6 @@ const SendMessage = observer(() => {
 
 
 
-
-    function connect() {
-        socket.current = new WebSocket('ws://localhost:5001')
-
-        socket.current.onopen = () => {
-            setConnected(true)
-
-            const message = {
-                event: 'connection',
-                from: user.userId,
-                id: user.userId
-            }
-            socket.current.send(JSON.stringify(message))
-            console.log('connection setup')
-        }
-        socket.current.onmessage = (event) => {
-
-            const message = JSON.parse(event.data)
-            setMessages(prev => [message, ...prev])
-
-
-
-            if(chat.chatWith === message.from || chat.chatWith === message.to){
-                chat.pushMessageList(message)
-            }
-
-            //
-            let chatList = toJS(leftChats.chatsList)
-
-
-            // chatList.forEach(chat=>{
-            //
-            //     if(chat.chatId===message.chatId){
-            //         console.log(chat)
-            //         chat.text=message.text
-            //         chat.updatedAt = message.createdAt
-            //         chat.from = message.from
-            //     }
-            //
-            //     return chat
-            // })
-            // console.log(chatList)
-
-
-
-            for(let i=0; i<chatList.length; i++){
-                // console.log(chatList)
-                if(chatList[i].chatId === message.chatId){
-                    chatList[i].text=message.text
-                    chatList[i].updatedAt = message.createdAt
-                    chatList[i].from = message.from
-
-                    let tempElement = chatList[i]
-                    chatList.splice(i, 1)
-                    chatList.unshift(tempElement)
-                    break
-                }
-
-            }
-
-
-
-            leftChats.setChatsList(chatList)
-
-
-
-        }
-        socket.current.onclose = () => {
-            console.log('socket closed')
-            setConnected(false)
-
-            console.log('trying reconnect in 5 seconds')
-            setTimeout(()=>{
-                connect()
-            }, 5000)
-
-
-        }
-        socket.current.onerror = () => {
-            console.log('socket error')
-            console.log('trying reconnect in 5 seconds')
-            setTimeout(()=>{
-                connect()
-            }, 5000)
-        }
-
-    }
 
     const sendMessage = async () => {
 
@@ -117,14 +30,18 @@ const SendMessage = observer(() => {
             media: null
 
         }
-        socket.current.send(JSON.stringify(message))
+
+        socketStore.setMessage(message)
+        socketStore.setSending(true)
+
+        // socket.current.send(JSON.stringify(message))
 
         setValue('')
     }
 
 
     const sendManyMessagesDev =  ()=>{
-        for(let i = 0; i<1000; i++){
+        for(let i = 0; i<100; i++){
 
             const message = {
                 event: 'message',
@@ -143,8 +60,9 @@ const SendMessage = observer(() => {
 
 
             setTimeout(()=>{
-                socket.current.send(JSON.stringify(message))
-            }, i*10)
+                socketStore.setMessage(message)
+                socketStore.setSending(true)
+            }, i*20)
 
 
 
@@ -152,11 +70,6 @@ const SendMessage = observer(() => {
     }
 
 
-    useEffect(()=>{
-        if(!connected){
-            connect()
-        }
-    }, [])
 
     return (
         <div className={'sendComponent'}>

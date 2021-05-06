@@ -31,6 +31,7 @@ export default class ChatStore {
         ]
         this._cachedMessagesList = {}
         this._offset = 0
+
         makeAutoObservable(this)
     }
 
@@ -72,6 +73,10 @@ export default class ChatStore {
     }
     resetOffset(){
         this._offset = 0
+    }
+
+    markReadMessage(id){
+        console.log(toJS(this._messageList).filter(message=> message.id === id))
     }
 
     get chatWith(){

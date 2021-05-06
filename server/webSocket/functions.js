@@ -68,6 +68,13 @@ console.log(message)
         })
     }
 
+
+    async ReadMessage(){
+
+
+        console.log('read message')
+    }
+
 }
 
 module.exports = new WebSocketFunctions

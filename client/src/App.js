@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import NavBar from "./components/navbar/NavBar";
 import LeftMenuMain from "./components/leftMenu/LeftMenuMain";
 import ChatMain from "./components/chat/ChatMain";
@@ -7,14 +7,18 @@ import {Context} from "./index";
 import AuthPage from "./components/auth/AuthPage";
 import {observer} from "mobx-react-lite";
 import {check, getAvatar} from "./http/userAPI";
+import {runInAction, toJS} from "mobx";
+
 
 
 
 const App = observer(() => {
 
-    const {user} = useContext(Context)
-
+    const {user, chat, leftChats, socketStore} =useContext(Context)
+    const socket = useRef()
     const [loading, setLoading] = useState(true)
+    const [connected, setConnected] = useState(false)
+    const [messages, setMessages] = useState([])
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -35,12 +39,110 @@ const App = observer(() => {
         }, 0)
 
 
-
     }, [])
+
+    useEffect(()=>{
+        if(!connected){
+            connect()
+        }
+    }, [])
+
+
+
+    function connect() {
+        socket.current = new WebSocket('ws://localhost:5001')
+
+        socket.current.onopen = () => {
+            setConnected(true)
+
+            const message = {
+                event: 'connection',
+                from: user.userId,
+                id: user.userId
+            }
+            socket.current.send(JSON.stringify(message))
+            console.log('connection setup')
+        }
+
+        socket.current.onmessage = (event) => {
+
+            const message = JSON.parse(event.data)
+            setMessages(prev => [message, ...prev])
+
+
+
+            if(chat.chatWith === message.from || chat.chatWith === message.to){
+                chat.pushMessageList(message)
+            }
+
+            //
+            let chatList = toJS(leftChats.chatsList)
+
+
+            for(let i=0; i<chatList.length; i++){
+                // console.log(chatList)
+                if(chatList[i].chatId === message.chatId){
+                    chatList[i].text=message.text
+                    chatList[i].updatedAt = message.createdAt
+                    chatList[i].from = message.from
+
+                    let tempElement = chatList[i]
+                    chatList.splice(i, 1)
+                    chatList.unshift(tempElement)
+                    break
+                }
+
+            }
+
+            leftChats.setChatsList(chatList)
+
+        }
+        socket.current.onclose = () => {
+            console.log('socket closed')
+            setConnected(false)
+
+            console.log('trying reconnect in 5 seconds')
+            setTimeout(()=>{
+                connect()
+            }, 5000)
+
+
+        }
+        socket.current.onerror = () => {
+
+            console.log('socket error')
+            console.log('trying reconnect in 5 seconds')
+            setTimeout(()=>{
+                connect()
+            }, 5000)
+        }
+
+
+    }
+
+    if(socketStore.sending){
+        try {
+
+                socket.current.send(JSON.stringify(socketStore.message))
+
+
+
+        } catch (e) {
+            console.log(e)
+        } finally {
+            runInAction(() => {
+                socketStore.setSending(false)
+            })
+        }
+
+
+    }
+
 
     if(loading){
         return <div>loading</div>
     }
+
     return (
         <div className="App">
             <BrowserRouter>

@@ -1,29 +1,51 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {parseDate} from "../../functions/parseDate";
+import {toJS} from "mobx";
 
 
 const Message = observer(({message, userInfoNeeded}) => {
 
 
     let {from, text, media, read, createdAt} = message
-    const {user, chat} = useContext(Context)
+    const {user, chat, socketStore} = useContext(Context)
 // console.log(userInfoNeeded)
 
     // console.log(authorId, text, media, read, date)
     // console.log(createdAt)
     // console.log(chat.chatAvatar)
 
+    const [readState, setReadState] = useState(read)
+
     createdAt = parseDate(createdAt)
 
 
+    const readHandler = ()=>{
+      chat.markReadMessage(message.id)
+        // so
+
+    }
+
+    // console.log(message)
+
+
     return (
-        <div className='messageBlock'>
+        <div className='messageBlock'
+        onMouseMove={()=>{
+            readHandler()
+        }}
+        >
+            {
+                readState?
+                    null
+                    :
+                    <div className={'unreadMarker'}> </div>
 
-            <div className={'unreadMarker'}>
+            }
 
-            </div>
+
+
             <div className='userAvatarSmallDiv'>
                 {
                     userInfoNeeded ?

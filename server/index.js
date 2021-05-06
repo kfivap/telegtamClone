@@ -41,6 +41,9 @@ const start = async () => {
                     case 'connection':
                         ws.id=message.id
                         break
+
+                    case 'readMessage':
+                        WSFunctions.ReadMessage()
                 }
             })
         })
