@@ -69,6 +69,11 @@ const App = observer(() => {
             const message = JSON.parse(event.data)
             setMessages(prev => [message, ...prev])
 
+            if(message.event === 'readMessage'){
+
+                chat.markReadMessage(message.id)
+            }
+
 
 
             if(chat.chatWith === message.from || chat.chatWith === message.to){

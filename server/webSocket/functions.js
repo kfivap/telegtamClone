@@ -69,11 +69,19 @@ class WebSocketFunctions {
 
 
     async ReadMessage(wss, message, ws) {
-        console.log(message)
-        const {id, from, to, text} = message
-        if(!id || !from ||  !to){
+
+        const {id, from, to, text, userId} = message
+        if(!id || !from ||  !to || !userId){
+            console.log('here')
             return
         }
+
+        if(userId === from && from!==to) {
+
+            return
+        }
+
+
         const readMessage = await Message.update(
             {read: true},
             {
@@ -82,7 +90,15 @@ class WebSocketFunctions {
                 }
             }
         )
-        console.log(readMessage)
+
+        wss.clients.forEach(client => {
+            if (client.id === to || client.id === from) {
+                console.log(client.id)
+                client.send(JSON.stringify(message))
+            }
+        })
+
+        // console.log(wss.clients)
 
 
     }

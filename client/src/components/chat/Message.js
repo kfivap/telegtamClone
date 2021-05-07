@@ -3,6 +3,7 @@ import {Context} from "../../index";
 import {observer} from "mobx-react-lite";
 import {parseDate} from "../../functions/parseDate";
 import {toJS} from "mobx";
+import UnreadMarker from "./UnreadMarker";
 
 
 const Message = observer(({message, userInfoNeeded}) => {
@@ -16,18 +17,20 @@ const Message = observer(({message, userInfoNeeded}) => {
     // console.log(createdAt)
     // console.log(chat.chatAvatar)
 
-    const [readState, setReadState] = useState(read)
+
 
     createdAt = parseDate(createdAt)
 
 
     const readHandler = ()=>{
-        if(readState){
+        if(message.read || message.from=== user.userId && message.to!==message.from){
             return
         }
+
       chat.markReadMessage(id)
         const reading = {
           event: "readMessage",
+            userId: user.userId,
             from: from,
             to: to,
             text: text,
@@ -38,7 +41,7 @@ const Message = observer(({message, userInfoNeeded}) => {
 
         }
         socketStore.setReading(reading)
-        setReadState(true)
+
 
     }
 
@@ -51,13 +54,9 @@ const Message = observer(({message, userInfoNeeded}) => {
             readHandler()
         }}
         >
-            {
-                readState?
-                    null
-                    :
-                    <div className={'unreadMarker'}> </div>
 
-            }
+                    <UnreadMarker message={message}/>
+
 
 
 
