@@ -70,11 +70,11 @@ const SendMessage = observer(() => {
     }
 
 
-
+    console.log(user.userAvatar)
     return (
         <div className={'sendComponent'}>
             <div className={'userPhoto'}>
-<img src={user.userAvatar} className='userAvatarSend'/>
+<img src={user.userAvatar? process.env.REACT_APP_API_URL  + user.userAvatar: ''} className='userAvatarSend'/>
             </div>
             <div className={'divTextArea'}>
                 <textarea

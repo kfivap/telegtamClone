@@ -21,9 +21,9 @@ const SearchLeft = observer(() => {
 
            // console.log(toJS(leftChats.chatsList))
            // console.log(data)
-           data.users.forEach(user=>
-           user.userPhoto = process.env.REACT_APP_API_URL + user.userPhoto
-           )
+           // data.users.forEach(user=>
+           // user.userPhoto = user.userPhoto
+           // )
            data.chats.forEach(chat=>{
                let userId
                for(let i=0; i<chat.usersArray.length; i++){

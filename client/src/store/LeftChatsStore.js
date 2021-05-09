@@ -8,7 +8,7 @@ export default class LeftChatStore {
             {
                 userId: 2,
                 userName: 'Nick Stoyan',
-                userPhoto: 'https://via.placeholder.com/150/24f355',
+                // userPhoto: 'https://via.placeholder.com/150/24f355',
                 time: Date.now(),
                 from: 1,
                 media: null,
@@ -20,7 +20,7 @@ export default class LeftChatStore {
             {
                 userId: 3,
                 userName: 'Alex Alex',
-                userPhoto: 'https://via.placeholder.com/150/d32776',
+                // userPhoto: 'https://via.placeholder.com/150/d32776',
                 time: Date.now()-120*1000,
                 from: 3,
                 media: 'video',
@@ -32,7 +32,7 @@ export default class LeftChatStore {
             {
                 userId: 55,
                 userName: 'Donal Trump',
-                userPhoto: 'https://via.placeholder.com/150/66b7d2',
+                // userPhoto: 'https://via.placeholder.com/150/66b7d2',
                 time: Date.now()-500*1000,
                 from: 100,
                 media: null,

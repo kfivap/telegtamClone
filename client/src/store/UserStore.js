@@ -7,7 +7,7 @@ export default class UserStore {
         // this._userId = null
         this._isAuth = false
         this._userId = 1
-        this._userAvatar = 'https://via.placeholder.com/150/5e12c6'
+        // this._userAvatar = 'https://via.placeholder.com/150/5e12c6'
         this._userName = 'Kirill Kirill'
 
         makeAutoObservable(this)
@@ -21,7 +21,7 @@ export default class UserStore {
     }
     setUserAvatar(src){
         // console.log(process.env.REACT_APP_API_URL + src)
-        this._userAvatar = process.env.REACT_APP_API_URL + src
+        this._userAvatar =  src
     }
     setUserName(name){
         this._userName = name

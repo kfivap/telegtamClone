@@ -49,7 +49,7 @@ const ChatPreview = observer(({dialog}) => {
         >
 
             <div className={'dialogPhoto'}>
-                <img src={userPhoto} className={'userAvatar'}
+                <img src={userPhoto ? process.env.REACT_APP_API_URL +userPhoto: ''} className={'userAvatar'}
                 />
             </div>
 
