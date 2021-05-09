@@ -1,4 +1,4 @@
-const {User, Chat} = require('../models/models')
+const {User, Chat, UnreadCounter} = require('../models/models')
 const {Op} = require("sequelize");
 const checkUserMiddleware = require('../middleware/checkUserMiddleware')
 
@@ -103,6 +103,32 @@ class ChatController {
             },
             order: [['updatedAt', 'DESC']]
         })
+
+        chats = JSON.parse(JSON.stringify(chats))
+        let chatIds = []
+        chats.rows.map(chat=>{
+            chatIds.push(chat.id)
+        })
+console.log(chatIds)
+
+
+        let unread = await UnreadCounter.findAll({
+            where:{
+                id: chatIds
+            }
+        })
+        unread = JSON.parse(JSON.stringify(unread))
+        console.log(unread)
+
+        for(let i=0; i<chats.rows.length; i++){
+            for(let j=0; j<unread.length; j++){
+                if (chats.rows[i].id ===unread[j].chatId){
+                    chats.rows[i].unread = unread[j].unread
+                }
+            }
+        }
+
+        console.log(chats.rows)
 
 
         return res.json(chats)

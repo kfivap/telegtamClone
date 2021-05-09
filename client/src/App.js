@@ -18,7 +18,7 @@ const App = observer(() => {
     const socket = useRef()
     const [loading, setLoading] = useState(true)
     const [connected, setConnected] = useState(false)
-    const [messages, setMessages] = useState([])
+
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -67,16 +67,29 @@ const App = observer(() => {
         socket.current.onmessage = (event) => {
 
             const message = JSON.parse(event.data)
-            setMessages(prev => [message, ...prev])
+
 
             if(message.event === 'readMessage'){
 
                 chat.markReadMessage(message.id)
+                console.log(message)
+                // if(message.from === user.userId){
+                //
+                // }
 
+
+                console.log(message.chatId)
+                if(message.from !== user.userId ){
+                    leftChats.setUnreadCounterByChatId(message.chatId, -1)
+                }
+
+
+
+                return
             }
 
 
-
+            console.log(message)
             if(chat.chatWith === message.from || chat.chatWith === message.to){
                 chat.pushMessageList(message)
             }
@@ -101,6 +114,9 @@ const App = observer(() => {
             }
 
             leftChats.setChatsList(chatList)
+            if(message.from !== user.userId ){
+                leftChats.setUnreadCounterByChatId(message.chatId, 1)
+            }
 
         }
         socket.current.onclose = () => {

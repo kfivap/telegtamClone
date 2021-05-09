@@ -15,7 +15,7 @@ const ChatPreview = observer(({dialog}) => {
 
     createdAt = parseDate(createdAt, true)
 
-    console.log(unreadCounter)
+    // console.log(unreadCounter)
     const you = from === user.userId
     const selected = chat.chatWith === userId
 
@@ -28,6 +28,7 @@ const ChatPreview = observer(({dialog}) => {
         chat.setChatWith(userId)
         chat.setChatAvatar(userPhoto)
         chat.setChatWithName(userName)
+
 
         // const cachedMessages  = toJS(chat.cachedMessagesList)
         // if(cachedMessages[chat.chatWith]){

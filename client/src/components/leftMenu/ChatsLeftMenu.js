@@ -107,7 +107,8 @@ const ChatsLeftMenu = observer(() => {
                 let unreadCounter = row.unread[unreadIndex]
 
                 target.unreadCounter = unreadCounter
-
+                // target.updatedAt = row.lastMessageTime
+console.log(target)
                 idToNamesArr.push(target.userId)
                 editedArray.push(target)
             })
@@ -129,7 +130,7 @@ const ChatsLeftMenu = observer(() => {
             }
 
 
-        // console.log(editedArray)
+        console.log(editedArray)
             leftChats.setChatsList(editedArray)
             // console.log(editedArray)
         }

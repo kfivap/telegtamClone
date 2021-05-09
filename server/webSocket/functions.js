@@ -1,4 +1,4 @@
-const {Message, Chat} = require('../models/models')
+const {Message, Chat, UnreadCounter} = require('../models/models')
 
 
 class WebSocketFunctions {
@@ -27,19 +27,25 @@ class WebSocketFunctions {
         let chat = await Chat.findOne({
             where: {usersArray: usersArray}
         })
+
         if (!chat) {
             chat = await Chat.create({
                 usersArray: usersArray
             })
+            await UnreadCounter.create({
+                chatId: chat.id
+            })
 
         }
-
 
         let newMessage = await Message.create({
             from: message.from,
             to: message.to,
             text: message.text,
             chatId: chat.id
+        })
+        let updatedChat = await chat.update({
+            lastMessage: JSON.stringify(newMessage)
         })
 
 
@@ -50,17 +56,20 @@ class WebSocketFunctions {
 
         let updatedUnreadIndex = usersArray.findIndex(elem=>elem===message.to)
 
-        let findChat = await Chat.findOne({where: {usersArray}})
-        findChat.unread[updatedUnreadIndex] +=1
+        // let findChat = await Chat.findOne({where: {usersArray}})
+        let unreadDB =await UnreadCounter.findOne({where:{
+               chatId: chat.id
+            }})
+       let unreadCount  = JSON.parse(JSON.stringify(unreadDB))
+        unreadCount.unread[updatedUnreadIndex]+=1
+
+        // console.log(unreadCount.unread)
+
+        await unreadDB.update(
+        {unread: unreadCount.unread})
 
 
-        let updatedChat = await chat.update({
-            lastMessage: JSON.stringify(newMessage),
-            unread: findChat.unread
-        })
-        // console.log(findChat)
 
-        // console.log(message)
         wss.clients.forEach(client => {
             // if(client.id === id)
             if (client.id === socketMessage.to || client.id === socketMessage.from) {
@@ -81,8 +90,9 @@ class WebSocketFunctions {
     async ReadMessage(wss, message, ws) {
 
         const {id, from, to, text, userId} = message
+        console.log(message)
         if(!id || !from ||  !to || !userId){
-            console.log('here')
+
             return
         }
 
@@ -94,27 +104,31 @@ class WebSocketFunctions {
             return a - b
         })
 
-        const readMessage = await Message.update(
-            {read: true},
+
+        const dbMessage = await Message.findOne(
             {
                 where: {
                     id, from, to, text
                 }
             }
         )
+        message.chatId = dbMessage.chatId
 
+        const readMessage = await dbMessage.update(
+            {read: true}
+        )
 
-        let updatedUnreadIndex = usersArray.findIndex(elem=>elem===message.to)
+        let updatedUnreadIndex = usersArray.findIndex(elem=>elem===to)
 
-        let chat = await Chat.findOne({where: {usersArray}})
-        let findChat = await Chat.findOne({where: {usersArray}})
-        findChat.unread[updatedUnreadIndex] -=1
-        console.log(findChat.unread)
+        let unreadDB =await UnreadCounter.findOne({where:{
+                chatId: dbMessage.chatId
+            }})
+        let unreadCount  = JSON.parse(JSON.stringify(unreadDB))
+        unreadCount.unread[updatedUnreadIndex]-=1
 
+        await unreadDB.update(
+            {unread: unreadCount.unread})
 
-        let updatedChat = await chat.update({
-            unread: findChat.unread
-        })
 
 
 

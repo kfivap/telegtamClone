@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, toJS} from "mobx";
 
 export default class LeftChatStore {
 
@@ -54,6 +54,25 @@ export default class LeftChatStore {
     }
     setIsSearch(boolean){
         this._isSearch = boolean
+    }
+
+    setUnreadCounterByChatId(chatId, number){
+       let chatList =  toJS(this._chatsList)
+        // for(let i; i<chatList.length; i++){
+        //
+        // }
+
+        chatList.forEach(chat=>{
+            if(chat.chatId=== chatId){
+                chat.unreadCounter = chat.unreadCounter+number
+            }
+            return chat
+        })
+
+        // chatList[ind].unreadCounter -= 1
+        // console.log(chatList[ind].unreadCounter)
+        // console.log(chatList)
+        this.setChatsList(chatList)
     }
 
     get chatsList(){

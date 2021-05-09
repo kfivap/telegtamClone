@@ -13,8 +13,12 @@ const Chat = sequelize.define('chat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     usersArray: {type: DataTypes.ARRAY(DataTypes.INTEGER), allowNull: false},
     lastMessage: { type: DataTypes.TEXT},
-    unread:{type: DataTypes.ARRAY(DataTypes.INTEGER), defaultValue: [0,0]}
 
+
+})
+const UnreadCounter = sequelize.define('unread', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    unread:{type: DataTypes.ARRAY(DataTypes.INTEGER), defaultValue: [0,0]}
 })
 
 const Message = sequelize.define('message', {
@@ -36,8 +40,11 @@ Chat.belongsToMany(User, {through: UserChats})
 Chat.hasMany(Message)
 Message.belongsTo(Chat)
 
+Chat.hasOne(UnreadCounter)
+UnreadCounter.belongsTo(Chat)
+
 
 module.exports = {
-    User, Chat, Message,
+    User, Chat, Message, UnreadCounter,
     UserChats
 }
