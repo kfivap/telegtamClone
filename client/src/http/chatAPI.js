@@ -3,15 +3,26 @@ import {$authHost, $host} from "./index";
 
 
 export const searchNick = async (nick, userId) => {
-    const {data} = await $authHost.get(`api/chat/findUsers?searchNick=${nick}&id=${userId}`)
+    try {
+        const {data} = await $authHost.get(`api/chat/findUsers?searchNick=${nick}&id=${userId}`)
 
-    return data
+        return data
+    } catch (e) {
+        console.log(e)
+    }
+
 }
 
 
 export const getChats = async () => {
+    try {
+
+
     const {data} = await $authHost.get(`api/chat/getChats`)
 
     return data
-}
+    } catch (e) {
+        console.log(e)
+    }
+    }
 

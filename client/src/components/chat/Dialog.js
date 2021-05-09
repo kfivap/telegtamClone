@@ -29,18 +29,22 @@ const Dialog = observer(() => {
     const [stopFetching, setStopFetching] = useState(false)
 
     async function fetchData() {
-
-        let limit = 50
-        if (!chat.chatWith) {
-            return
-        }
-        let messages = await getMessages(chat.chatWith, chat.offset, limit)
-if(messages.rows.length===0){
-    setStopFetching(true)
+try{
+    let limit = 50
+    if (!chat.chatWith) {
+        return
+    }
+    let messages = await getMessages(chat.chatWith, chat.offset, limit)
+    if(messages.rows.length===0){
+        setStopFetching(true)
+    }
+    messages.rows = messages.rows.reverse()
+    chat.pushMessageList(messages.rows)
+    chat.increaseOffset(limit)
+} catch (e) {
+    console.log(e)
 }
-        messages.rows = messages.rows.reverse()
-        chat.pushMessageList(messages.rows)
-        chat.increaseOffset(limit)
+
 
     }
 
