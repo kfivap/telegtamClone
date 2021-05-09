@@ -72,7 +72,8 @@ class WebSocketFunctions {
 
         wss.clients.forEach(client => {
             // if(client.id === id)
-            if (client.id === socketMessage.to || client.id === socketMessage.from) {
+            console.log(client.id)
+            if (client.id === socketMessage.to) {
                 client.send(JSON.stringify(socketMessage))
             }
             // client.send(JSON.stringify(socketMessage))
@@ -90,7 +91,7 @@ class WebSocketFunctions {
     async ReadMessage(wss, message, ws) {
 
         const {id, from, to, text, userId} = message
-        console.log(message)
+        // console.log(message)
         if(!id || !from ||  !to || !userId){
 
             return
@@ -133,7 +134,8 @@ class WebSocketFunctions {
 
 
         wss.clients.forEach(client => {
-            if (client.id === to || client.id === from) {
+
+            if (client.id === from) {
                 console.log(client.id)
                 client.send(JSON.stringify(message))
             }

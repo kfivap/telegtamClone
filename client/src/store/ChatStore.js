@@ -79,7 +79,7 @@ export default class ChatStore {
       let readArray =  toJS(this._messageList)
 
           readArray.forEach(message=> {
-// console.log(message.id, id)
+
             if (message.id === id) {
                 console.log(message.id, id)
                 message.read = true
@@ -87,7 +87,7 @@ export default class ChatStore {
             return message
         }
     )
-        // console.log(readArray)
+
         this._messageList = readArray
 
     }

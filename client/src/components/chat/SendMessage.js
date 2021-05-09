@@ -34,7 +34,32 @@ const SendMessage = observer(() => {
         socketStore.setMessage(message)
         socketStore.setSending(true)
 
-        // socket.current.send(JSON.stringify(message))
+        if(chat.chatWith === message.from || chat.chatWith === message.to){
+            chat.pushMessageList(message)
+        }
+
+        let chatList = toJS(leftChats.chatsList)
+        console.log(chatList)
+
+
+        let chatId =chatList.filter(chat=>chat.userId === message.to)
+chatId = chatId[0].chatId
+
+
+        for(let i=0; i<chatList.length; i++){
+            // console.log(chatList)
+            if(chatList[i].chatId === chatId){
+                chatList[i].text=message.text
+                chatList[i].updatedAt = message.createdAt
+                chatList[i].from = message.from
+
+                let tempElement = chatList[i]
+                chatList.splice(i, 1)
+                chatList.unshift(tempElement)
+                break
+            }
+        }
+        leftChats.setChatsList(chatList)
 
         setValue('')
     }
@@ -70,7 +95,12 @@ const SendMessage = observer(() => {
     }
 
 
-    console.log(user.userAvatar)
+
+
+    if(!chat.chatWith){
+        return null
+    }
+
     return (
         <div className={'sendComponent'}>
             <div className={'userPhoto'}>

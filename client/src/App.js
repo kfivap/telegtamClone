@@ -32,6 +32,9 @@ const App = observer(() => {
                     user.setUserAvatar(avatar)
                 })
                 console.log(data)
+                if(!connected){
+                    connect()
+                }
                 // user.setUserAvatar(data.avatar)
 
             }).finally(()=> setLoading(false))
@@ -41,11 +44,6 @@ const App = observer(() => {
 
     }, [])
 
-    useEffect(()=>{
-        if(!connected){
-            connect()
-        }
-    }, [])
 
 
 
@@ -57,7 +55,7 @@ const App = observer(() => {
 
             const message = {
                 event: 'connection',
-                from: user.userId,
+                // from: user.userId,
                 id: user.userId
             }
             socket.current.send(JSON.stringify(message))
@@ -80,6 +78,7 @@ const App = observer(() => {
 
                 console.log(message.chatId)
                 if(message.from !== user.userId ){
+                    console.log(123)
                     leftChats.setUnreadCounterByChatId(message.chatId, -1)
                 }
 

@@ -58,9 +58,6 @@ export default class LeftChatStore {
 
     setUnreadCounterByChatId(chatId, number){
        let chatList =  toJS(this._chatsList)
-        // for(let i; i<chatList.length; i++){
-        //
-        // }
 
         chatList.forEach(chat=>{
             if(chat.chatId=== chatId){
@@ -68,12 +65,22 @@ export default class LeftChatStore {
             }
             return chat
         })
-
-        // chatList[ind].unreadCounter -= 1
-        // console.log(chatList[ind].unreadCounter)
-        // console.log(chatList)
         this.setChatsList(chatList)
     }
+    setUnreadCounterByChatWith(chatWith, number){
+       let chatList =  toJS(this._chatsList)
+
+        chatList.forEach(chat=>{
+            console.log(chat.userId)
+            if(chat.userId=== chatWith){
+                chat.unreadCounter = chat.unreadCounter+number
+            }
+            return chat
+        })
+        this.setChatsList(chatList)
+    }
+
+
 
     get chatsList(){
         return this._chatsList

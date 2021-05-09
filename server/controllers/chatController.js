@@ -35,7 +35,7 @@ class ChatController {
         }
         )
 
-        console.log(idsArray)
+        // console.log(idsArray)
 
 
         let OpOrQuery = []
@@ -58,12 +58,12 @@ class ChatController {
                 }
             }
 
-            console.log([idsArray[i][0], idsArray[i][1]])
+            // console.log([idsArray[i][0], idsArray[i][1]])
 
             OpOrQuery.push(query)
         }
 
-        console.log(OpOrQuery)
+        // console.log(OpOrQuery)
         let one = [1,1]
 
         let chats = await Chat.findAll({
@@ -109,7 +109,7 @@ class ChatController {
         chats.rows.map(chat=>{
             chatIds.push(chat.id)
         })
-console.log(chatIds)
+// console.log(chatIds)
 
 
         let unread = await UnreadCounter.findAll({
@@ -118,7 +118,7 @@ console.log(chatIds)
             }
         })
         unread = JSON.parse(JSON.stringify(unread))
-        console.log(unread)
+        // console.log(unread)
 
         for(let i=0; i<chats.rows.length; i++){
             for(let j=0; j<unread.length; j++){
@@ -128,7 +128,7 @@ console.log(chatIds)
             }
         }
 
-        console.log(chats.rows)
+        // console.log(chats.rows)
 
 
         return res.json(chats)

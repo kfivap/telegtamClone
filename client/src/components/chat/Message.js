@@ -10,7 +10,7 @@ const Message = observer(({message, userInfoNeeded}) => {
 
 
     let {from, to, text, media, read, createdAt, id} = message
-    const {user, chat, socketStore} = useContext(Context)
+    const {user, chat, socketStore, leftChats} = useContext(Context)
 // console.log(userInfoNeeded)
 
     // console.log(authorId, text, media, read, date)
@@ -28,6 +28,8 @@ const Message = observer(({message, userInfoNeeded}) => {
         }
 
       chat.markReadMessage(id)
+
+        leftChats.setUnreadCounterByChatWith( chat.chatWith, -1)
         const reading = {
           event: "readMessage",
             userId: user.userId,
