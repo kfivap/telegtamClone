@@ -15,7 +15,7 @@ const ChatPreview = observer(({dialog}) => {
 
     createdAt = parseDate(createdAt, true)
 
-
+    console.log(unreadCounter)
     const you = from === user.userId
     const selected = chat.chatWith === userId
 

@@ -93,15 +93,20 @@ const ChatsLeftMenu = observer(() => {
 
 
                 let chatWith = row.usersArray.filter(id => id !== user.userId)
-                // console.log(user.userId)
-                // console.log(chatWith[0])
 
-                // console.log(target)
+
                 target.userId = chatWith[0]
 
                 if (!chatWith[0]) {
                     target.userId = user.userId
                 }
+
+                let unreadIndex = row.usersArray.findIndex(elem => elem === user.userId)
+
+
+                let unreadCounter = row.unread[unreadIndex]
+
+                target.unreadCounter = unreadCounter
 
                 idToNamesArr.push(target.userId)
                 editedArray.push(target)
@@ -124,6 +129,7 @@ const ChatsLeftMenu = observer(() => {
             }
 
 
+        // console.log(editedArray)
             leftChats.setChatsList(editedArray)
             // console.log(editedArray)
         }

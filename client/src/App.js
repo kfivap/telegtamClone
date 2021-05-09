@@ -72,6 +72,7 @@ const App = observer(() => {
             if(message.event === 'readMessage'){
 
                 chat.markReadMessage(message.id)
+
             }
 
 

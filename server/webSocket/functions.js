@@ -5,7 +5,7 @@ class WebSocketFunctions {
 
     async broadcastMessage(wss, message, ws) {
 
-        console.log(message)
+        // console.log(message)
         let usersArray = [message.from, message.to].sort(function (a, b) {
             return a - b
         })
@@ -20,6 +20,8 @@ class WebSocketFunctions {
         if (isNull) {
             return
         }
+
+
 
 
         let chat = await Chat.findOne({
@@ -43,14 +45,22 @@ class WebSocketFunctions {
 
         let socketMessage = JSON.parse(JSON.stringify(newMessage))
         socketMessage.event = message.event
-        // console.log(socketMessage)
+
+
+
+        let updatedUnreadIndex = usersArray.findIndex(elem=>elem===message.to)
+
+        let findChat = await Chat.findOne({where: {usersArray}})
+        findChat.unread[updatedUnreadIndex] +=1
 
 
         let updatedChat = await chat.update({
-            lastMessage: JSON.stringify(newMessage)
+            lastMessage: JSON.stringify(newMessage),
+            unread: findChat.unread
         })
+        // console.log(findChat)
 
-        console.log(message)
+        // console.log(message)
         wss.clients.forEach(client => {
             // if(client.id === id)
             if (client.id === socketMessage.to || client.id === socketMessage.from) {
@@ -58,10 +68,10 @@ class WebSocketFunctions {
             }
             // client.send(JSON.stringify(socketMessage))
 
-            console.log('message to', socketMessage.to,
-                'client.id', client.id,
-                "ws.id", ws.id
-            )
+            // console.log('message to', socketMessage.to,
+            //     'client.id', client.id,
+            //     "ws.id", ws.id
+            // )
 
 
         })
@@ -77,10 +87,12 @@ class WebSocketFunctions {
         }
 
         if(userId === from && from!==to) {
-
             return
         }
 
+        let usersArray = [from, to].sort(function (a, b) {
+            return a - b
+        })
 
         const readMessage = await Message.update(
             {read: true},
@@ -90,6 +102,21 @@ class WebSocketFunctions {
                 }
             }
         )
+
+
+        let updatedUnreadIndex = usersArray.findIndex(elem=>elem===message.to)
+
+        let chat = await Chat.findOne({where: {usersArray}})
+        let findChat = await Chat.findOne({where: {usersArray}})
+        findChat.unread[updatedUnreadIndex] -=1
+        console.log(findChat.unread)
+
+
+        let updatedChat = await chat.update({
+            unread: findChat.unread
+        })
+
+
 
         wss.clients.forEach(client => {
             if (client.id === to || client.id === from) {
