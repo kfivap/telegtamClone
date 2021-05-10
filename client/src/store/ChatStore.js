@@ -31,6 +31,7 @@ export default class ChatStore {
         ]
         this._cachedMessagesList = {}
         this._offset = 0
+        this._scroll = 10000000
 
         makeAutoObservable(this)
     }
@@ -43,6 +44,7 @@ export default class ChatStore {
         this._chatAvatar = src
     }
     pushMessageList(messages){
+        console.log(messages)
 
         if(messages.length || messages.length>1){
             this._messageList = [ ...messages, ...toJS(this._messageList)]
@@ -75,10 +77,15 @@ export default class ChatStore {
         this._offset = 0
     }
 
+    setScroll(pos){
+        this._scroll = pos
+    }
+
     markReadMessage(id){
       let readArray =  toJS(this._messageList)
 
-          readArray.forEach(message=> {
+console.log(readArray)
+           let newmap  =readArray.map(message=> {
 
             if (message.id === id) {
                 console.log(message.id, id)
@@ -88,9 +95,13 @@ export default class ChatStore {
         }
     )
 
-        this._messageList = readArray
+
+        this._messageList = newmap
 
     }
+
+
+
 
     get chatWith(){
         return this._chatWith
@@ -106,6 +117,9 @@ export default class ChatStore {
     }
     get offset(){
         return this._offset
+    }
+    get scroll(){
+        return this._scroll
     }
     // get cachedMessagesList(){
     //     return this._cachedMessagesList

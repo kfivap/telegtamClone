@@ -42,7 +42,7 @@ const ChatsLeftMenu = observer(() => {
             if (data.rows.count === 0) {
                 return
             }
-        console.log(data)
+        // console.log(data)
 
             data.rows.forEach(row => {
                 delete row.createdAt
@@ -108,7 +108,7 @@ const ChatsLeftMenu = observer(() => {
 
                 target.unreadCounter = unreadCounter
                 // target.updatedAt = row.lastMessageTime
-console.log(target)
+// console.log(target)
                 idToNamesArr.push(target.userId)
                 editedArray.push(target)
             })
@@ -130,7 +130,7 @@ console.log(target)
             }
 
 
-        console.log(editedArray)
+        // console.log(editedArray)
             leftChats.setChatsList(editedArray)
             // console.log(editedArray)
         }

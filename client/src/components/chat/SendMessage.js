@@ -9,10 +9,9 @@ const SendMessage = observer(() => {
     const {user, chat, leftChats, socketStore} =useContext(Context)
 
 
-    const [messages, setMessages] = useState([])
     const [value, setValue] = useState('')
-    const socket = useRef()
-    const [connected, setConnected] = useState(false)
+
+
 
 
 
@@ -33,33 +32,37 @@ const SendMessage = observer(() => {
 
         socketStore.setMessage(message)
         socketStore.setSending(true)
+//
+//         if(chat.chatWith === message.from || chat.chatWith === message.to){
+//             chat.pushMessageList(message)
+//         }
+//
+//         let chatList = toJS(leftChats.chatsList)
+//         // console.log(chatList)
+//
+//
+//         let chatId =chatList.filter(chat=>chat.userId === message.to)
+// chatId = chatId[0].chatId
+//
+//
+//         for(let i=0; i<chatList.length; i++){
+//             // console.log(chatList)
+//             if(chatList[i].chatId === chatId){
+//                 chatList[i].text=message.text
+//                 chatList[i].updatedAt = message.createdAt
+//                 chatList[i].from = message.from
+//
+//                 let tempElement = chatList[i]
+//                 chatList.splice(i, 1)
+//                 chatList.unshift(tempElement)
+//                 break
+//             }
+//         }
+//         leftChats.setChatsList(chatList)
+//         chat.setScroll(chat.scroll+100)
 
-        if(chat.chatWith === message.from || chat.chatWith === message.to){
-            chat.pushMessageList(message)
-        }
-
-        let chatList = toJS(leftChats.chatsList)
-        console.log(chatList)
 
 
-        let chatId =chatList.filter(chat=>chat.userId === message.to)
-chatId = chatId[0].chatId
-
-
-        for(let i=0; i<chatList.length; i++){
-            // console.log(chatList)
-            if(chatList[i].chatId === chatId){
-                chatList[i].text=message.text
-                chatList[i].updatedAt = message.createdAt
-                chatList[i].from = message.from
-
-                let tempElement = chatList[i]
-                chatList.splice(i, 1)
-                chatList.unshift(tempElement)
-                break
-            }
-        }
-        leftChats.setChatsList(chatList)
 
         setValue('')
     }

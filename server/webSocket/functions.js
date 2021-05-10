@@ -69,19 +69,21 @@ class WebSocketFunctions {
         {unread: unreadCount.unread})
 
 
+let       messageFrom = {
+            event: 'getMessageId',
+    id: message
+}
 
         wss.clients.forEach(client => {
-            // if(client.id === id)
+
             console.log(client.id)
             if (client.id === socketMessage.to) {
                 client.send(JSON.stringify(socketMessage))
             }
-            // client.send(JSON.stringify(socketMessage))
+            if(client.id === message.from){
+                client.send(JSON.stringify(socketMessage))
+            }
 
-            // console.log('message to', socketMessage.to,
-            //     'client.id', client.id,
-            //     "ws.id", ws.id
-            // )
 
 
         })
@@ -136,6 +138,10 @@ class WebSocketFunctions {
         wss.clients.forEach(client => {
 
             if (client.id === from) {
+                console.log(client.id)
+                client.send(JSON.stringify(message))
+            }
+            if (client.id === to) {
                 console.log(client.id)
                 client.send(JSON.stringify(message))
             }

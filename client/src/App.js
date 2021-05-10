@@ -71,12 +71,8 @@ const App = observer(() => {
 
                 chat.markReadMessage(message.id)
                 console.log(message)
-                // if(message.from === user.userId){
-                //
-                // }
 
-
-                console.log(message.chatId)
+                console.log(message.id)
                 if(message.from !== user.userId ){
                     console.log(123)
                     leftChats.setUnreadCounterByChatId(message.chatId, -1)
@@ -89,32 +85,41 @@ const App = observer(() => {
 
 
             console.log(message)
-            if(chat.chatWith === message.from || chat.chatWith === message.to){
-                chat.pushMessageList(message)
-            }
 
-            //
-            let chatList = toJS(leftChats.chatsList)
-
-
-            for(let i=0; i<chatList.length; i++){
-                // console.log(chatList)
-                if(chatList[i].chatId === message.chatId){
-                    chatList[i].text=message.text
-                    chatList[i].updatedAt = message.createdAt
-                    chatList[i].from = message.from
-
-                    let tempElement = chatList[i]
-                    chatList.splice(i, 1)
-                    chatList.unshift(tempElement)
-                    break
+                if (chat.chatWith === message.from || chat.chatWith === message.to) {
+                    console.log(message)
+                    chat.pushMessageList(message)
+                    console.log(toJS(chat.messageList))
                 }
 
-            }
+                //
+                let chatList = toJS(leftChats.chatsList)
 
-            leftChats.setChatsList(chatList)
-            if(message.from !== user.userId ){
-                leftChats.setUnreadCounterByChatId(message.chatId, 1)
+
+                for (let i = 0; i < chatList.length; i++) {
+                    // console.log(chatList)
+                    if (chatList[i].chatId === message.chatId) {
+                        chatList[i].text = message.text
+                        chatList[i].updatedAt = message.createdAt
+                        chatList[i].from = message.from
+
+                        let tempElement = chatList[i]
+                        chatList.splice(i, 1)
+                        chatList.unshift(tempElement)
+                        break
+                    }
+
+                }
+
+                leftChats.setChatsList(chatList)
+                chat.setScroll(chat.scroll + 100)
+                if (message.from !== user.userId) {
+                    leftChats.setUnreadCounterByChatId(message.chatId, 1)
+                }
+
+
+            if(message.event ==='getMessageId') {
+            console.log(456)
             }
 
         }

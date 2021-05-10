@@ -5,6 +5,7 @@ import {observer} from "mobx-react-lite";
 import {toJS} from "mobx";
 import {getMessages} from "../../http/messageAPI";
 
+
 const Dialog = observer(() => {
 
     function useWindowSize() {
@@ -74,7 +75,18 @@ try{
     const [loading, setLoading] = useState(false)
 
 
+
+
     let lastId = null
+
+    useEffect(()=>{
+        dialogRef.current.scrollTop =  chat.scroll
+    }, [chat.scroll])
+
+
+
+
+
     return (
         <div className={'chatMessages'}
              style={{height: height - 200}}
