@@ -24,17 +24,19 @@ const App = observer(() => {
         setTimeout(()=>{
             check().then(data=>{
                 // console.log(data)
-
-                user.setIsAuth(true)
-                user.setUserId(data.id)
-                user.setUserName(data.nick)
-                getAvatar(data.id).then((avatar)=>{
-                    user.setUserAvatar(avatar)
-                })
-                console.log(data)
-                if(!connected){
-                    connect()
+                if(data){
+                    user.setIsAuth(true)
+                    user.setUserId(data.id)
+                    user.setUserName(data.nick)
+                    getAvatar(data.id).then((avatar)=>{
+                        user.setUserAvatar(avatar)
+                    })
+                    console.log(data)
+                    if(!connected){
+                        connect()
+                    }
                 }
+
                 // user.setUserAvatar(data.avatar)
 
             }).finally(()=> setLoading(false))
