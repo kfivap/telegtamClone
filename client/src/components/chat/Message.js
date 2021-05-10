@@ -67,9 +67,9 @@ const Message = observer(({message, userInfoNeeded}) => {
                     userInfoNeeded ?
 
                         <img src={user.userId === from ?
-                            user.userAvatar
+                           process.env.REACT_APP_API_URL +  user.userAvatar
                             :
-                            chat.chatAvatar
+                            process.env.REACT_APP_API_URL +   chat.chatAvatar
                         } className='userAvatarSmall'
                         alt=''
                         />
