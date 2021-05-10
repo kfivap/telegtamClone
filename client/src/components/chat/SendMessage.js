@@ -99,7 +99,6 @@ const SendMessage = observer(() => {
 
 
 
-
     if(!chat.chatWith){
         return null
     }
@@ -115,9 +114,17 @@ const SendMessage = observer(() => {
                     placeholder={'Write a message...'}
                     value={value}
                    onChange={e=>setValue(e.target.value)}
+
+                    onKeyPress={(e)=>{
+                        if(e.charCode===13){
+                            sendMessage()
+                        }
+
+                    }}
                 />
                 <div className='sendButton'
                 onClick={sendMessage}
+
                 >Send</div><
 
                 div className='sendButton'
@@ -126,7 +133,10 @@ const SendMessage = observer(() => {
             </div>
 
             <div className={'chatPhoto'}>
-                <img src={chat.chatAvatar} className='userAvatarSend'/>
+                <img src={chat.chatAvatar?
+                    process.env.REACT_APP_API_URL  +chat.chatAvatar :
+                    ' '
+                } className='userAvatarSend'/>
             </div>
 
         </div>
